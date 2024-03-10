@@ -1,1 +1,2 @@
-print("pruebita")
+def main()-> None:
+    print("pruebita")
