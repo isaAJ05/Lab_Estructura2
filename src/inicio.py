@@ -1,8 +1,9 @@
 from NodoArbol import Tree, Nodo
+#from graphviz import Digraph
 def main()-> None:
     print("pruebita")
 
-    def generate_sample_abb() -> "Tree":
+    def generate_sample_abb() -> "Tree": #Genera un arbol de busqueda binaria de ejemplo
         tree = Tree(Nodo(20))
         print(tree.insert(21))
         print(tree.insert(33))

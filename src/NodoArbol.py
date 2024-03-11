@@ -23,11 +23,14 @@ class Cola:
         return len(self.cola) == 0
 
 class Nodo:
+
     def __init__(self, data: Any) -> None:
         self.data = data
         self.left: Optional['Nodo'] = None
         self.right: Optional['Nodo'] = None
         self.factor_balance:int = 0
+        self.type = type(data)
+        self.size: int = 0
 
     def __str__(self) -> str:
         return str(self.data)
@@ -53,9 +56,49 @@ class Nodo:
             return 1
 
 class Tree:
-
-    def __init__(self, root: "Nodo") -> None: #Inicializa el arbol
+    # El arbol debe insertar, eliminar, buscar, buscar todos los nodos de cierta categoria,buscar segun size
+    # El arbol debe tener un metodo para balancear
+    # recorrido por niveles recursivo
+    # Obtener el nivel del nodo.
+    # b. Obtener el factor de balanceo (equilibrio) del nodo.
+    # c. Encontrar el padre del nodo.
+    # d. Encontrar el abuelo del nodo.
+    # e. Encontrar el tío del nodo.
+    def __init__(self, root: "Nodo"=None) -> None: #Inicializa el arbol
         self.root = root
+
+    def search(self, elem: Any) -> Tuple[Optional["Nodo"], Optional["Nodo"]]:
+        p, pad = self.root, None
+        while p is not None:
+            if elem == p.data:
+                return p, pad
+            elif elem < p.data:
+                pad = p
+                p = p.left
+            else:
+                pad = p
+                p = p.right
+        return p, pad
+
+    def insert(self, elem: Any) -> bool:
+        to_insert = Nodo(elem)
+        if self.root is None:
+            self.root = to_insert
+            return True
+        else:
+            p, pad = self.search(elem)
+            if p is None:
+                if elem < pad.data:
+                    pad.left = to_insert
+                else:
+                    pad.right = to_insert
+                # rebalancear arbol
+
+                return True
+            return False
+
+
+
     def altura(self) -> int: #Altura del arbol
         p=self.root
         if p is None:
