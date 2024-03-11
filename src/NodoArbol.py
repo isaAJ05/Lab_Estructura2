@@ -33,22 +33,22 @@ class Nodo:
         return str(self.data)
     def calcular_factor_balance(self) -> None: #Calcula el factor de balance
         if self.left is not None:
-            self.factor_balance = self.left.get_height()
+            self.factor_balance = self.left.get_niveles()
         else:
             self.factor_balance = 0
         if self.right is not None:
-            self.factor_balance -= self.right.get_height()
+            self.factor_balance -= self.right.get_niveles()
         else:
             self.factor_balance -= 0
 
 
-    def get_height(self) -> int: #Altura del nodo
+    def get_niveles(self) -> int: #Altura del nodo
         if self.left is not None and self.right is not None:
-            return 1 + max(self.left.get_height(), self.right.get_height())
+            return 1 + max(self.left.get_niveles(), self.right.get_niveles())
         elif self.left is not None:
-            return 1 + self.left.get_height()
+            return 1 + self.left.get_niveles()
         elif self.right is not None:
-            return 1 + self.right.get_height()
+            return 1 + self.right.get_niveles()
         else:
             return 1
 
@@ -64,6 +64,9 @@ class Tree:
             alt_left = self.altura(p.left)
             alt_right = self.altura(p.right)
             return max(alt_left, alt_right) + 1
+
+
+
     def rot_der(self, p: "Nodo") -> "Nodo":
         pass
     def rot_izq(self, p: "Nodo") -> "Nodo":
