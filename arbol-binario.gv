@@ -1,0 +1,18 @@
+// Árbol de Búsqueda Binaria
+digraph {
+	bike_001 [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/bike/bike_001.bmp" shape=none]
+	0001 [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/flowers/0001.png" shape=none]
+	bike_001 -> 0001
+	bike_002 [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/bike/bike_002.bmp" shape=none]
+	bike_001 -> bike_002
+	carsgraz_001 [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/cars/carsgraz_001.bmp" shape=none]
+	bike_002 -> carsgraz_001
+	"cat.1" [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/cats/cat.1.jpg" shape=none]
+	carsgraz_001 -> "cat.1"
+	"dog.1" [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/dogs/dog.1.jpg" shape=none]
+	"cat.1" -> "dog.1"
+	"horse-1" [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/horses/horse-1.jpg" shape=none]
+	"dog.1" -> "horse-1"
+	"rider-1" [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/human/rider-1.jpg" shape=none]
+	"horse-1" -> "rider-1"
+}

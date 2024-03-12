@@ -29,11 +29,49 @@ class Nodo:
         self.left: Optional['Nodo'] = None
         self.right: Optional['Nodo'] = None
         self.factor_balance:int = 0
-        self.type = type(data)
+        self.type = self.determine_type(str(self.data)) # Agrega el atributo 'type'
         self.size: int = 0
+        self.typeImage: str = self.determine_typeImage(str(self.data))
 
     def __str__(self) -> str:
         return str(self.data)
+    def determine_type(self, data: str) -> str:
+        # Define las reglas para determinar el tipo según el nombre del archivo
+        if "bike" in data:
+            return "bike"
+        elif "carsgraz" in data:
+            return "cars"
+        elif "cat" in data:
+            return "cats"
+        elif "dog" in data:
+            return "dogs"
+        elif str(data).startswith("0"):
+            return "flowers"
+        elif "horse" in data:
+            return "horses"
+        elif "rider" in data:
+            return "human"
+        else:
+            return "unknown"  # Si no se encuentra una clasificación específica
+    def determine_typeImage(self, data: str) -> str:
+        # Define las reglas para determinar el tipo según el nombre del archivo
+        if "bike" in data:
+            return ".bmp"
+        elif "carsgraz" in data:
+            return ".bmp"
+        elif "cat" in data:
+            return ".jpg"
+        elif "dog" in data:
+            return ".jpg"
+        elif str(data).startswith("0"):
+            return ".png"
+        elif "horse" in data:
+            return ".jpg"
+        elif "rider" in data:
+            return ".jpg"
+        else:
+            return "unknown"  # Si no se encuentra una clasificación específica
+
     def calcular_factor_balance(self) -> None: #Calcula el factor de balance
         if self.left is not None:
             self.factor_balance = self.left.get_niveles()
