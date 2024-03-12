@@ -1,5 +1,5 @@
 from NodoArbol import Tree, Nodo
-#from graphviz import Digraph
+import graphviz
 def main()-> None:
     print("pruebita")
 
