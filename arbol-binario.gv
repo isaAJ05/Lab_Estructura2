@@ -1,20 +1,18 @@
 // Árbol de Búsqueda Binaria
 digraph {
-	bike_001 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpqtvl1bgb.png" shape=none]
-	0002 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpxmrjd8n4.png" shape=none]
+	bike_001 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpyj3d32m2.png" shape=none]
+	0002 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpy1g836ey.png" shape=none]
 	bike_001 -> 0002
-	0001 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpawlwua5k.png" shape=none]
+	0001 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmp1dg16q1e.png" shape=none]
 	0002 -> 0001
-	0003 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpa3t5yee3.png" shape=none]
+	0003 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpw74pf9mh.png" shape=none]
 	0002 -> 0003
-	"dog.1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpgmdfi3ka.png" shape=none]
+	"dog.1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmp59io85vy.png" shape=none]
 	bike_001 -> "dog.1"
-	carsgraz_001 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpd60qwusg.png" shape=none]
+	carsgraz_001 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmp3b_cuke8.png" shape=none]
 	"dog.1" -> carsgraz_001
-	"cat.1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpx3akjcw4.png" shape=none]
+	"cat.1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmp42_cdf5t.png" shape=none]
 	carsgraz_001 -> "cat.1"
-	"horse-1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpplmkinba.png" shape=none]
-	"dog.1" -> "horse-1"
-	"rider-1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmp4uk_vb_7.png" shape=none]
-	"horse-1" -> "rider-1"
+	"rider-1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmphr3cki_v.png" shape=none]
+	"dog.1" -> "rider-1"
 }

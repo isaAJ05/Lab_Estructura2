@@ -135,7 +135,70 @@ class Tree:
                 return True
             return False
 
+    def delete(self, elem: Any, mode: bool = True) -> bool:
+        p, pad = self.search(elem)
+        if p is not None:
+            if p.left is None and p.right is None:
+                if p == pad.left:
+                    pad.left = None
+                else:
+                    pad.right = None
+                del p
+            elif p.left is not None and p.right is None:
+                if p == pad.left:
+                    pad.left = p.left
+                else:
+                    pad.right = p.left
+                del p
+            elif p.left is None and p.right is not None:
+                if p == pad.left:
+                    pad.left = p.right
+                else:
+                    pad.right = p.right
+                del p
+            else:
+                if mode:
+                    pred, pad_pred = self.__pred(p)
+                    p.data = pred.data
+                    if pred.left is not None:
+                        if pad_pred == p:
+                            pad_pred.left = pred.left
+                        else:
+                            pad_pred.right = pred.left
+                    else:
+                        if pad_pred == p:
+                            pad_pred.left = None
+                        else:
+                            pad_pred.right = None
+                    del pred
+                else:
+                    sus, pad_sus = self.__sus(p)
+                    p.data = sus.data
+                    if sus.right is not None:
+                        if pad_sus == p:
+                            pad_sus.right = sus.right
+                        else:
+                            pad_sus.left = sus.right
+                    else:
+                        if pad_sus == p:
+                            pad_sus.right = None
+                        else:
+                            pad_sus.left = None
+                    del sus
+            return True
+        return False
 
+    def __pred(self, node: "Nodo") -> Tuple["Nodo", "Nodo"]:
+        p, pad = node.left, node
+        while p.right is not None:
+            p, pad = p.right, p
+        return p, pad
+
+    def __sus(self, node: "Nodo") -> Tuple["Nodo", "Nodo"]:
+        p, pad = node.right, node
+        while p.left is not None:
+            p, pad = p.left, p
+        return p, pad
 
     def altura(self) -> int: #Altura del arbol
         p=self.root
