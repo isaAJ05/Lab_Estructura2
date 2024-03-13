@@ -34,13 +34,15 @@ class Nodo:
         self.left: Optional['Nodo'] = None
         self.right: Optional['Nodo'] = None
         self.factor_balance:int = 0
-        self.type = self.determine_type(str(self.data)) # Agrega el atributo 'type'
-        self.size: int = 0
-        self.typeImage: str = self.determine_typeImage(str(self.data))
+        self.type = self.determinar_type(str(self.data)) # Agrega el atributo 'type'
+        self.typeImage: str = self.determinar_typeImage(str(self.data))
+        self.file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"data/{self.type}/{self.data}{self.typeImage}")
+        #se obtiene el directorio del script y se une el directorio del script con la ruta relativa de la imagen (para verificación de existencia de la imagen)
+        self.size = self.get_size_archivo(os.path.join(os.path.dirname(os.path.abspath(__file__)), f"data/{self.type}/{self.data}{self.typeImage}"))
 
     def __str__(self) -> str:
         return str(self.data)
-    def determine_type(self, data: str) -> str:
+    def determinar_type(self, data: str) -> str:
         # Define las reglas para determinar el tipo según el nombre del archivo
         if "bike" in data:
             return "bike"
@@ -58,7 +60,7 @@ class Nodo:
             return "human"
         else:
             return "unknown"  # Si no se encuentra una clasificación específica
-    def determine_typeImage(self, data: str) -> str:
+    def determinar_typeImage(self, data: str) -> str:
         # Define las reglas para determinar el tipo según el nombre del archivo
         if "bike" in data:
             return ".bmp"
@@ -76,6 +78,9 @@ class Nodo:
             return ".jpg"
         else:
             return "unknown"  # Si no se encuentra una clasificación específica
+    
+    def get_size_archivo(self, file_path):
+        return os.path.getsize(file_path)
 
     def calcular_factor_balance(self) -> None: #Calcula el factor de balance
         if self.left is not None:
@@ -122,6 +127,24 @@ class Tree:
                 pad = p
                 p = p.right
         return p, pad
+    def search_nodos_categoria_rango(self, categoria: str, rango1: float, rango2: float) -> List["Nodo"]:
+        # Lista para almacenar los nodos que cumplen con los criterios
+        nodos_aprobados = []
+
+        # Función auxiliar para recorrer el árbol
+        def traverse(nodo):
+            if nodo:
+                # Verifica si el nodo cumple con los criterios
+                if nodo.type == categoria and rango1 <= nodo.size < rango2:
+                    nodos_aprobados.append(nodo)
+
+                # Recorre los subárboles izquierdo y derecho
+                traverse(nodo.left)
+                traverse(nodo.right)
+
+        # Comienza el recorrido desde la raíz del árbol
+        traverse(self.root)
+        return nodos_aprobados
 
     def insert(self, elem: Any) -> bool:
         to_insert = Nodo(elem)
@@ -215,11 +238,8 @@ class Tree:
             # Recorre el árbol y agrega nodos y aristas
             def add_nodes_and_edges(node, parent=None):
                 if node:
-                    # Obtén el directorio del script
-                    script_dir = os.path.dirname(os.path.abspath(__file__))
-
-                    # Une el directorio del script con la ruta relativa de la imagen
-                    img_path = os.path.join(script_dir, f"data/{node.type}/{node.data}{node.typeImage}")
+                    
+                    img_path = node.file_path
 
                     img = Image.open(img_path)
 

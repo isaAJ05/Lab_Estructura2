@@ -26,7 +26,7 @@ def main() -> None:
         print("1. Insertar nodo")
         print("2. Eliminar nodo")
         print("3. Buscar nodo")
-        print("4. Buscar nodos por categoría y peso")  # Nueva opción agregada
+        print("4. Buscar nodos por categoría y rango de peso")  
         print("5. Salir")
         option = input("\n->Ingrese una opción: ")
 
@@ -53,17 +53,17 @@ def main() -> None:
 
         elif option == "4":
             # Buscar nodos por categoría y peso
-            categoria = input("Ingrese la categoría: ")
+            categoria = input("Ingrese la categoría: ").lower()
             print("Ingrese un rango (en bytes) del peso del archivo")
             rango1 = float(input("De: "))
             rango2 = float(input("Hasta: "))
-            """"nodos_encontrados= search_nodes(sample_tree, categoria, rango1, rango2)
+            nodos_encontrados= sample_tree.search_nodos_categoria_rango(categoria, rango1, rango2)
             if nodos_encontrados:
                 print("Nodos encontrados:")
                 for nodo in nodos_encontrados:
                     print(nodo.data)
             else:
-                print("No se encontraron nodos con la categoría y peso especificados.")"""
+                print("No se encontraron nodos con la categoría y peso especificados.")
 
         elif option == "5":
             #Salir del programa
