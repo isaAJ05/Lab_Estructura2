@@ -1,4 +1,9 @@
 from typing import Any, List, Optional, Tuple
+import graphviz
+import tempfile
+from tkinter import Image
+from PIL import Image
+import os
 class Stack:
     def __init__(self) -> None:
         self.stack: List[Any] = []
@@ -199,6 +204,53 @@ class Tree:
         while p.left is not None:
             p, pad = p.left, p
         return p, pad
+    
+    def graficar(self) -> None:
+            # Crea un objeto de gráfico
+            dot = graphviz.Digraph(comment='Árbol de Búsqueda Binaria')
+
+            # Crea una lista para almacenar todas las rutas de archivos temporales
+            temp_files = []
+
+            # Recorre el árbol y agrega nodos y aristas
+            def add_nodes_and_edges(node, parent=None):
+                if node:
+                    # Obtén el directorio del script
+                    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+                    # Une el directorio del script con la ruta relativa de la imagen
+                    img_path = os.path.join(script_dir, f"data/{node.type}/{node.data}{node.typeImage}")
+
+                    img = Image.open(img_path)
+
+                    # Crea un archivo temporal para la imagen PNG
+                    fd, path = tempfile.mkstemp(suffix=".png")
+                    temp_files.append(path)  # Añadir la ruta a la lista
+                    try:
+                        with os.fdopen(fd, 'wb') as tmp:
+                            # Guardar la imagen en formato PNG
+                            img.save(tmp, "PNG")
+
+                        # Agrega el nodo con la imagen como etiqueta
+                        dot.node(str(node.data), label=str(node.data), image=path, shape='none', fontname="Arial Bold",
+                                 fontcolor='red', labelloc='b')
+
+                        if parent:
+                            dot.edge(str(parent.data), str(node.data))
+                        add_nodes_and_edges(node.left, node)
+                        add_nodes_and_edges(node.right, node)
+
+                    except Exception as e:
+                        print(f"Error: {e}")
+
+            add_nodes_and_edges(self.root)
+
+            # Guarda el código fuente en un archivo
+            dot.render('arbol-binario.gv', view=True)
+
+            # Ahora que hemos terminado con el gráfico, podemos eliminar los archivos temporales
+            for path in temp_files:
+                os.remove(path)
 
     def altura(self) -> int: #Altura del arbol
         p=self.root

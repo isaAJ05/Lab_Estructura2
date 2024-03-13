@@ -1,20 +1,20 @@
 // Árbol de Búsqueda Binaria
 digraph {
-	bike_001 [label=bike_001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpn5sw1whj.png" labelloc=b shape=none]
-	0002 [label=0002 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp5x2tmsxv.png" labelloc=b shape=none]
+	bike_001 [label=bike_001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp_mwywegg.png" labelloc=b shape=none]
+	0002 [label=0002 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpc_36l5lg.png" labelloc=b shape=none]
 	bike_001 -> 0002
-	0001 [label=0001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp2rt3qc3z.png" labelloc=b shape=none]
+	0001 [label=0001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp108qv5rd.png" labelloc=b shape=none]
 	0002 -> 0001
-	0003 [label=0003 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp9jz2238g.png" labelloc=b shape=none]
+	0003 [label=0003 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpaboz9a4r.png" labelloc=b shape=none]
 	0002 -> 0003
-	"dog.1" [label="dog.1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpraqphcus.png" labelloc=b shape=none]
+	"dog.1" [label="dog.1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpc09c6kyh.png" labelloc=b shape=none]
 	bike_001 -> "dog.1"
-	carsgraz_001 [label=carsgraz_001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpz_vlkuh0.png" labelloc=b shape=none]
+	carsgraz_001 [label=carsgraz_001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpzhnxe2et.png" labelloc=b shape=none]
 	"dog.1" -> carsgraz_001
-	"cat.1" [label="cat.1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpl71d4h5q.png" labelloc=b shape=none]
+	"cat.1" [label="cat.1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpdqlzj2wx.png" labelloc=b shape=none]
 	carsgraz_001 -> "cat.1"
-	"horse-1" [label="horse-1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpltlbu195.png" labelloc=b shape=none]
+	"horse-1" [label="horse-1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp54956xix.png" labelloc=b shape=none]
 	"dog.1" -> "horse-1"
-	"rider-1" [label="rider-1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmph8mbk7bw.png" labelloc=b shape=none]
+	"rider-1" [label="rider-1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpump79nmy.png" labelloc=b shape=none]
 	"horse-1" -> "rider-1"
 }
