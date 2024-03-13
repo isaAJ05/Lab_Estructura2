@@ -1,18 +1,20 @@
 // Árbol de Búsqueda Binaria
 digraph {
-	bike_001 [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/bike/bike_001.bmp" shape=none]
-	0001 [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/flowers/0001.png" shape=none]
-	bike_001 -> 0001
-	bike_002 [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/bike/bike_002.bmp" shape=none]
-	bike_001 -> bike_002
-	carsgraz_001 [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/cars/carsgraz_001.bmp" shape=none]
-	bike_002 -> carsgraz_001
-	"cat.1" [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/cats/cat.1.jpg" shape=none]
+	bike_001 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpqtvl1bgb.png" shape=none]
+	0002 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpxmrjd8n4.png" shape=none]
+	bike_001 -> 0002
+	0001 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpawlwua5k.png" shape=none]
+	0002 -> 0001
+	0003 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpa3t5yee3.png" shape=none]
+	0002 -> 0003
+	"dog.1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpgmdfi3ka.png" shape=none]
+	bike_001 -> "dog.1"
+	carsgraz_001 [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpd60qwusg.png" shape=none]
+	"dog.1" -> carsgraz_001
+	"cat.1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpx3akjcw4.png" shape=none]
 	carsgraz_001 -> "cat.1"
-	"dog.1" [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/dogs/dog.1.jpg" shape=none]
-	"cat.1" -> "dog.1"
-	"horse-1" [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/horses/horse-1.jpg" shape=none]
+	"horse-1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmpplmkinba.png" shape=none]
 	"dog.1" -> "horse-1"
-	"rider-1" [label="" image="c:\Users\USUARIO\Desktop\UN\4 Semesre\Es II\Lab_Estructura2\src\data/human/rider-1.jpg" shape=none]
+	"rider-1" [label="" image="C:\Users\USUARIO\AppData\Local\Temp\tmp4uk_vb_7.png" shape=none]
 	"horse-1" -> "rider-1"
 }
