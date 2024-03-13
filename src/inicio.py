@@ -24,31 +24,31 @@ def main() -> None:
         # Crea un objeto de gráfico
         dot = graphviz.Digraph(comment='Árbol de Búsqueda Binaria')
 
-        # Create a list to hold all temporary file paths
+        # Crea una lista para almacenar todas las rutas de archivos temporales
         temp_files = []
 
         # Recorre el árbol y agrega nodos y aristas
         def add_nodes_and_edges(node, parent=None):
             if node:
                 
-                # Get the directory of the script
+                # Obtén el directorio del script
                 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-                # Join the script directory with the relative path to the image
+                # Une el directorio del script con la ruta relativa de la imagen
                 img_path = os.path.join(script_dir, f"data/{node.type}/{node.data}{node.typeImage}")
 
                 img = Image.open(img_path)
 
-                # Create a temporary file for the PNG image
+                # Crea un archivo temporal para la imagen PNG
                 fd, path = tempfile.mkstemp(suffix=".png")
-                temp_files.append(path)  # Add the path to the list
+                temp_files.append(path)  #Añadir la ruta a la lista
                 try:
                     with os.fdopen(fd, 'wb') as tmp:
-                        # Save the image in PNG format
+                        #Guardar la imagen en formato PNG
                         img.save(tmp, "PNG")
 
                     # Agrega el nodo con la imagen como etiqueta
-                    dot.node(str(node.data), label='', image=path, shape='none')
+                    dot.node(str(node.data), label=str(node.data), image=path, shape='none',fontname="Arial Bold", fontcolor='red', labelloc='b')
 
                     if parent:
                         dot.edge(str(parent.data), str(node.data))
@@ -63,7 +63,7 @@ def main() -> None:
         # Guarda el código fuente en un archivo
         dot.render('arbol-binario.gv', view=True)
 
-        # Now that we're done with the graph, we can delete the temp files
+        # Ahora que hemos terminado con el gráfico, podemos eliminar los archivos temporales
         for path in temp_files:
             os.remove(path)
     sample_tree = generate_sample_abb()
