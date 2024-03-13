@@ -66,6 +66,8 @@ def main() -> None:
         # Ahora que hemos terminado con el gráfico, podemos eliminar los archivos temporales
         for path in temp_files:
             os.remove(path)
+    print("\nBienvenidx")
+    # Genera un árbol de búsqueda binaria de ejemplo
     sample_tree = generate_sample_abb()
     graficar(sample_tree)
     
@@ -83,21 +85,34 @@ def main() -> None:
         sample_tree.delete(node_data)
         graficar(sample_tree)  # Vuelve a generar el gráfico
 
+    # Función para buscar un nodo del árbol
+    def search_node() -> None:
+                node_data = input("Ingrese el dato del nodo a buscar: ")
+                found_node = sample_tree.search(node_data)
+                if found_node:
+                    print("El nodo se encuentra en el árbol.")
+                else:
+                    print("El nodo no se encuentra en el árbol.")
     # Menú de opciones
     while True:
+        print("OPERACIONES")
         print("1. Insertar nodo")
         print("2. Eliminar nodo")
-        print("3. Salir")
-        option = input("Ingrese una opción: ")
+        print("3. Buscar nodo")
+        print("4. Salir")
+        option = input("\n->Ingrese una opción: ")
 
         if option == "1":
             insert_node()
         elif option == "2":
             delete_node()
         elif option == "3":
+            search_node()
+        elif option == "4":
+            print("¡Muchas gracias por implementar el programa!")
             break
         else:
             print("Opción inválida. Intente nuevamente.")
-
+        print("*************************************************************\n")
 if __name__ == "__main__":
     main()
