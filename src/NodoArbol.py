@@ -34,7 +34,7 @@ class Nodo:
         self.left: Optional['Nodo'] = None
         self.right: Optional['Nodo'] = None
         self.factor_balance:int = 0
-        self.type = self.determinar_type(str(self.data)) # Agrega el atributo 'type'
+        self.type = self.determinar_type(str(self.data)) 
         self.typeImage: str = self.determinar_typeImage(str(self.data))
         self.file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"data/{self.type}/{self.data}{self.typeImage}")
         #se obtiene el directorio del script y se une el directorio del script con la ruta relativa de la imagen (para verificación de existencia de la imagen)
@@ -43,7 +43,7 @@ class Nodo:
     def __str__(self) -> str:
         return str(self.data)
     def determinar_type(self, data: str) -> str:
-        # Define las reglas para determinar el tipo según el nombre del archivo
+        # Se define las reglas para determinar el tipo según el nombre del archivo, la mayoría de las veces se basa en la presencia de ciertas palabras clave
         if "bike" in data:
             return "bike"
         elif "carsgraz" in data:
@@ -52,7 +52,7 @@ class Nodo:
             return "cats"
         elif "dog" in data:
             return "dogs"
-        elif str(data).startswith("0"):
+        elif str(data).startswith("0"): # En el caso de flowers se determina si el nombre del archivo comienza con un dígito
             return "flowers"
         elif "horse" in data:
             return "horses"
@@ -61,7 +61,7 @@ class Nodo:
         else:
             return "unknown"  # Si no se encuentra una clasificación específica
     def determinar_typeImage(self, data: str) -> str:
-        # Define las reglas para determinar el tipo según el nombre del archivo
+        # Es parecido al anterior, pero en este caso se determina el formato de imagen según el nombre del archivo
         if "bike" in data:
             return ".bmp"
         elif "carsgraz" in data:
@@ -80,7 +80,7 @@ class Nodo:
             return "unknown"  # Si no se encuentra una clasificación específica
     
     def get_size_archivo(self, file_path):
-        return os.path.getsize(file_path)
+        return os.path.getsize(file_path) #Se obtiene el tamaño del archivo en bytes a partir de la ruta del archivo con la función os.path.getsize
 
     def calcular_factor_balance(self) -> None: #Calcula el factor de balance
         if self.left is not None:
