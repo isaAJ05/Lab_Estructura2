@@ -66,7 +66,6 @@ def main() -> None:
                             print("El nivel del nodo es: ", sample_tree.get_nivel(found_node[0]))
                         case "b":
                             found_node[0].actualizar_factor_balance()
-                            
                             print("El factor de balanceo del nodo es: ", found_node[0].factor_balance)
                         case "c":
                             if(sample_tree.search_daddy(found_node[0].data)==None):
@@ -129,6 +128,7 @@ def main() -> None:
                         case "a":
                             print("El nivel del nodo es: ", sample_tree.get_nivel(found))
                         case "b":
+                            found.actualizar_factor_balance()
                             print("El factor de balanceo del nodo es: ", found.factor_balance)
                         case "c":
                             if(sample_tree.search_daddy(found.data)==None):
