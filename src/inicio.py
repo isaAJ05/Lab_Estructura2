@@ -55,16 +55,16 @@ def main() -> None:
                 
                 while(moreop=="s" or moreop=="S"):
                     print("a. Obtener nivel del nodo")
-                    print("b. Obtener altura del nodo")
+                    print("b. Obtener factor de Balanceo del nodo")
                     print("c. Obtener el padre del nodo")
                     print("d. Obtener el abuelo del nodo")
                     print("e. Obtener el tío del nodo")
                     opp = input("\n->Ingrese una opción: ")
                     match(opp):
                         case "a":
-                            print("El nivel del nodo es: ", sample_tree.get_niveles(found_node[0]))
+                            print("El nivel del nodo es: ", sample_tree.get_nivel(found_node[0]))
                         case "b":
-                            print("La altura del nodo es: ", sample_tree.get_niveles(found_node[0])+1)
+                            print("La altura del nodo es: ", sample_tree.get_alturaNodo(found_node[0]))
                         case "c":
                             if(sample_tree.search_daddy(found_node[0].data)==None):
                                 print("El nodo no tiene padre.")
@@ -117,16 +117,16 @@ def main() -> None:
                             name = input("->Ingrese nombre: ")
                         
                     print("\na. Obtener nivel del nodo")
-                    print("b. Obtener altura del nodo")
+                    print("b. Obtener factor de Balanceo nodo")
                     print("c. Obtener el padre del nodo")
                     print("d. Obtener el abuelo del nodo")
                     print("e. Obtener el tío del nodo")
                     opp = input("\n->Ingrese una opción: ")
                     match(opp):
                         case "a":
-                            print("El nivel del nodo es: ", sample_tree.get_niveles(found))
+                            print("El nivel del nodo es: ", sample_tree.get_nivel(found))
                         case "b":
-                            print("La altura del nodo es: ", sample_tree.get_niveles(found)+1)
+                            print("La altura del nodo es: ", sample_tree.get_nivel(found)+1)
                         case "c":
                             if(sample_tree.search_daddy(found.data)==None):
                                 print("El nodo no tiene padre.")

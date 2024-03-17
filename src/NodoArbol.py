@@ -286,9 +286,20 @@ class Tree:
             alt_right = self.altura(p.right)
             return max(alt_left, alt_right) + 1
 
-    def get_niveles(self,nodo:Any) -> int: #Obtiene el nivel del nodo
+    def get_nivel(self,nodo:Any) -> int: #Obtiene el nivel del nodo
         p=self.root
         c=0
+        while p.data!=nodo.data:
+            c+=1
+            if nodo.data<p.data:
+                p=p.left
+            else:
+                p=p.right
+        return c
+    
+    def get_alturaNodo(self,nodo:Any) -> int: #Obtiene el altura del nodo
+        p=self.root
+        c=1 #solo se cambia la inicializacion de c
         while p.data!=nodo.data:
             c+=1
             if nodo.data<p.data:
