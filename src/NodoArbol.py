@@ -92,7 +92,7 @@ class Nodo:
     def calcular_factor_balance(self) ->None:
         altura_izquierda = self.calcular_altura(self.left)
         altura_derecha = self.calcular_altura(self.right)
-        return altura_izquierda - altura_derecha
+        return  altura_derecha-altura_izquierda
     
     def actualizar_factor_balance(self) -> None:
         self.factor_balance = self.calcular_factor_balance()
