@@ -34,12 +34,13 @@ class Nodo:
         self.left: Optional['Nodo'] = None
         self.right: Optional['Nodo'] = None
         self.factor_balance:int = 0
+        
         self.type = self.determinar_type(str(self.data)) 
         self.typeImage: str = self.determinar_typeImage(str(self.data))
         self.file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"data/{self.type}/{self.data}{self.typeImage}")
         #se obtiene el directorio del script y se une el directorio del script con la ruta relativa de la imagen (para verificación de existencia de la imagen)
         self.size = self.get_size_archivo(os.path.join(os.path.dirname(os.path.abspath(__file__)), f"data/{self.type}/{self.data}{self.typeImage}"))
-
+        self.actualizar_factor_balance()
     def __str__(self) -> str:
         return str(self.data)
     def determinar_type(self, data: str) -> str:
@@ -83,17 +84,19 @@ class Nodo:
     def get_size_archivo(self, file_path):
         return os.path.getsize(file_path) #Se obtiene el tamaño del archivo en bytes a partir de la ruta del archivo con la función os.path.getsize
 
-    def calcular_factor_balance(self) -> None: #Calcula el factor de balance
-        if self.left is not None:
-            self.factor_balance = self.left.get_niveles()
-        else:
-            self.factor_balance = 0
-        if self.right is not None:
-            self.factor_balance -= self.right.get_niveles()
-        else:
-            self.factor_balance -= 0
+    def calcular_altura(self, nodo: Optional['Nodo']) -> int:
+        if nodo is None:
+            return 0
+        return max(self.calcular_altura(nodo.left), self.calcular_altura(nodo.right)) + 1
 
-
+    def calcular_factor_balance(self) ->None:
+        altura_izquierda = self.calcular_altura(self.left)
+        altura_derecha = self.calcular_altura(self.right)
+        return altura_izquierda - altura_derecha
+    
+    def actualizar_factor_balance(self) -> None:
+        self.factor_balance = self.calcular_factor_balance()
+        
     
 
 class Tree:
@@ -155,16 +158,21 @@ class Tree:
         to_insert = Nodo(elem)
         if self.root is None:
             self.root = to_insert
+            to_insert.actualizar_factor_balance()
             return True
         else:
             p, pad = self.search(elem)
             if p is None:
                 if elem < pad.data:
                     pad.left = to_insert
+                   
+                    pad.left.actualizar_factor_balance()
                 else:
                     pad.right = to_insert
+                    pad.right.actualizar_factor_balance()
+                
                 # rebalancear arbol
-
+                to_insert.actualizar_factor_balance()
                 return True
             return False
 

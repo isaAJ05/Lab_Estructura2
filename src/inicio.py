@@ -23,6 +23,7 @@ def main() -> None:
     
     # Menú de opciones
     while True:
+        
         print("OPERACIONES")
         print("1. Insertar nodo")
         print("2. Eliminar nodo")
@@ -64,7 +65,9 @@ def main() -> None:
                         case "a":
                             print("El nivel del nodo es: ", sample_tree.get_nivel(found_node[0]))
                         case "b":
-                            print("La altura del nodo es: ", sample_tree.get_alturaNodo(found_node[0]))
+                            found_node[0].actualizar_factor_balance()
+                            
+                            print("El factor de balanceo del nodo es: ", found_node[0].factor_balance)
                         case "c":
                             if(sample_tree.search_daddy(found_node[0].data)==None):
                                 print("El nodo no tiene padre.")
@@ -126,7 +129,7 @@ def main() -> None:
                         case "a":
                             print("El nivel del nodo es: ", sample_tree.get_nivel(found))
                         case "b":
-                            print("La altura del nodo es: ", sample_tree.get_nivel(found)+1)
+                            print("El factor de balanceo del nodo es: ", found.factor_balance)
                         case "c":
                             if(sample_tree.search_daddy(found.data)==None):
                                 print("El nodo no tiene padre.")
