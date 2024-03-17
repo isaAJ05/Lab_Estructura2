@@ -60,6 +60,7 @@ class Nodo:
             return "human"
         else:
             return "unknown"  # Si no se encuentra una clasificación específica
+        
     def determinar_typeImage(self, data: str) -> str:
         # Es parecido al anterior, pero en este caso se determina el formato de imagen según el nombre del archivo
         if "bike" in data:
@@ -127,6 +128,7 @@ class Tree:
                 pad = p
                 p = p.right
         return p, pad
+    
     def search_nodos_categoria_rango(self, categoria: str, rango1: float, rango2: float) -> List["Nodo"]:
         # Lista para almacenar los nodos que cumplen con los criterios
         nodos_aprobados = []
@@ -281,8 +283,70 @@ class Tree:
             alt_right = self.altura(p.right)
             return max(alt_left, alt_right) + 1
 
+    #Devuelve el padre de un nodo
+    def search_daddy(self, data_s: Any) -> Optional["Nodo"]: #Busca el padre de un nodo
+        p, pad = self.root, None
+        s, flag = Stack(), False
+        while (p is not None or not s.is_empty()) and not flag:
+            if p is not None:
+                if p.data == data_s:
+                    if pad is not None:
+                        return pad
+                    flag = True
+                else:
+                    s.add(p)
+                    pad = p
+                    p = p.left
+            else:
+                p = s.remove()
+                pad = p
+                p = p.right
 
+        if not flag or pad is None:
+            return None
 
+    def find_sibling_ayudita(self, data_s: Any) -> Optional["Nodo"]:
+        parent = self.search_daddy(data_s) #Se busca el padre del nodo
+        if parent is None: #Si no se encuentra el padre, no tiene hermano
+            return None
+        else:
+          if parent.left is not None and parent.left.data == data_s: #Si el nodo es el hijo izquierdo, se devuelve el hijo derecho
+              return parent.right
+          elif parent.right is not None and parent.right.data == data_s: #Si el nodo es el hijo derecho, se devuelve el hijo izquierdo
+              return parent.left
+          else: #Si no se encuentra el nodo, no tiene hermano
+              return None
+          
+    #se llama originalmente a esta para buscar al Hermano de un nodo
+    def search_bro(self, data_: Any) -> None:
+        sibling = self.find_sibling_ayudita(data_) #Se busca el hermano del nodo
+        if sibling is not None:
+            print(f'The sibling of {data_!r} is {sibling.data!r}')
+        else:
+            print(f'There is no sibling for {data_!r}')
+    
+    #Buscar tio : hermano del padre
+    def search_tio(self,data_s:Any)->None:
+      tio =None
+      padre=self.search_daddy(data_s)#Se busca el padre del nodo
+      if padre is not None: # Si tiene padre, se busca el hermano del padre
+        tio=self.find_sibling_ayudita(padre.data)
+      if tio is not None: #Si se encuentra el tio, se imprime
+        print(f' El tio de {data_s!r} es {tio.data}')
+      else:
+        print(f' {data_s!r} no tiene tio')     
+    
+    # Buscar ABUELO: padre del padre
+    def search_granpa(self,data_s:Any)->None:
+      pa=self.search_daddy(data_s) #Se busca el padre del nodo
+      granpa=None # Se inicializa la variable abuelo
+      if pa is not None: #Si tiene padre, se busca el padre del padre
+        granpa=self.search_daddy(pa.data)
+      if granpa is not None: #Si se encuentra el abuelo, se imprime
+        print(f' El abuelo de {data_s!r} es {granpa.data}')
+      else:
+        print(f' {data_s!r} no tiene abuelo')
+            
     def rot_der(self, p: "Nodo") -> "Nodo":
         pass
     def rot_izq(self, p: "Nodo") -> "Nodo":
