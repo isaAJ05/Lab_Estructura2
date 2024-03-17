@@ -52,7 +52,8 @@ def main() -> None:
                 print("El nodo se encuentra en el árbol.")
                 print("Desea realizar mas acciones con este nodo? (S/N)")
                 moreop= input("\n->Ingrese una opción: ")
-                if(moreop=="s" or moreop=="S"):
+                
+                while(moreop=="s" or moreop=="S"):
                     print("a. Obtener nivel del nodo")
                     print("b. Obtener altura del nodo")
                     print("c. Obtener el padre del nodo")
@@ -79,7 +80,8 @@ def main() -> None:
                                 print("El nodo no tiene tío.")
                             else:
                                 print("El tío del nodo es: ", sample_tree.search_tio(found_node[0].data).data)
-                            
+                    print("\n Desea realizar mas acciones con este nodo? (S/N)")
+                    moreop= input("\n->Ingrese una opción: ")  
                             
             else:
                 print("El nodo no se encuentra en el árbol.")
@@ -95,6 +97,53 @@ def main() -> None:
                 print("Nodos encontrados:")
                 for nodo in nodos_encontrados:
                     print(nodo.data)
+                
+                print("Desea realizar mas acciones con algun nodo? (S/N)")
+                moreop= input("\n->Ingrese una opción: ")
+                
+                while(moreop=="s" or moreop=="S"):
+                    
+                    print ("Ingrese el nombre del nodo con el que desea trabajar")
+                    name = input("->Ingrese nombre: ")
+                    found = None
+                    while found == None:
+                        for nodo in nodos_encontrados:
+                            if nodo.data == name:
+                                found = nodo
+                                break
+                        if found == None:
+                            print("El nodo no se encuentra en la lista de nodos encontrados.")
+                            print ("\n Ingrese correctamente el nombre del nodo con el que desea trabajar")
+                            name = input("->Ingrese nombre: ")
+                        
+                    print("\na. Obtener nivel del nodo")
+                    print("b. Obtener altura del nodo")
+                    print("c. Obtener el padre del nodo")
+                    print("d. Obtener el abuelo del nodo")
+                    print("e. Obtener el tío del nodo")
+                    opp = input("\n->Ingrese una opción: ")
+                    match(opp):
+                        case "a":
+                            print("El nivel del nodo es: ", found.get_niveles())
+                        case "b":
+                            print("La altura del nodo es: ", found.get_niveles()+1)
+                        case "c":
+                            if(sample_tree.search_daddy(found.data)==None):
+                                print("El nodo no tiene padre.")
+                            else:
+                                print("El padre del nodo es: ", sample_tree.search_daddy(found.data).data)
+                        case "d":
+                            if(sample_tree.search_granpa(found.data)==None):
+                                print("El nodo no tiene abuelo.")
+                            else:
+                                print("El abuelo del nodo es: ", sample_tree.search_granpa(found.data).data)
+                        case "e":
+                            if(sample_tree.search_tio(found.data)==None):
+                                print("El nodo no tiene tío.")
+                            else:
+                                print("El tío del nodo es: ", sample_tree.search_tio(found.data).data)
+                    print("\n Desea realizar mas acciones con algun nodo? (S/N)")
+                    moreop= input("\n->Ingrese una opción: ")
             else:
                 print("No se encontraron nodos con la categoría y peso especificados.")
 
