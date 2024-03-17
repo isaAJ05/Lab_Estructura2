@@ -62,9 +62,9 @@ def main() -> None:
                     opp = input("\n->Ingrese una opción: ")
                     match(opp):
                         case "a":
-                            print("El nivel del nodo es: ", found_node[0].get_niveles())
+                            print("El nivel del nodo es: ", sample_tree.get_niveles(found_node[0]))
                         case "b":
-                            print("La altura del nodo es: ", found_node[0].get_niveles()+1)
+                            print("La altura del nodo es: ", sample_tree.get_niveles(found_node[0])+1)
                         case "c":
                             if(sample_tree.search_daddy(found_node[0].data)==None):
                                 print("El nodo no tiene padre.")
@@ -124,9 +124,9 @@ def main() -> None:
                     opp = input("\n->Ingrese una opción: ")
                     match(opp):
                         case "a":
-                            print("El nivel del nodo es: ", found.get_niveles())
+                            print("El nivel del nodo es: ", sample_tree.get_niveles(found))
                         case "b":
-                            print("La altura del nodo es: ", found.get_niveles()+1)
+                            print("La altura del nodo es: ", sample_tree.get_niveles(found)+1)
                         case "c":
                             if(sample_tree.search_daddy(found.data)==None):
                                 print("El nodo no tiene padre.")

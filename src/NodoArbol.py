@@ -94,15 +94,7 @@ class Nodo:
             self.factor_balance -= 0
 
 
-    def get_niveles(self) -> int: #Obtiene el nivel del nodo
-        if self.left is not None and self.right is not None:
-            return 1 + max(self.left.get_niveles(), self.right.get_niveles())
-        elif self.left is not None:
-            return 1 + self.left.get_niveles()
-        elif self.right is not None:
-            return 1 + self.right.get_niveles()
-        else:
-            return 1
+    
 
 class Tree:
     # El arbol debe insertar, eliminar, buscar, buscar todos los nodos de cierta categoria,buscar segun size
@@ -294,6 +286,20 @@ class Tree:
             alt_right = self.altura(p.right)
             return max(alt_left, alt_right) + 1
 
+    def get_niveles(self,nodo:Any) -> int: #Obtiene el nivel del nodo
+        p=self.root
+        c=0
+        while p.data!=nodo.data:
+            c+=1
+            if nodo.data<p.data:
+                p=p.left
+            else:
+                p=p.right
+        return c
+                
+            
+        
+            
     #Devuelve el padre de un nodo
     def search_daddy(self, data_s: Any) -> Optional["Nodo"]: #Busca el padre de un nodo
         p, pad = self.root, None
