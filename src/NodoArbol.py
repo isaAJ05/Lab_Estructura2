@@ -94,7 +94,7 @@ class Nodo:
             self.factor_balance -= 0
 
 
-    def get_niveles(self) -> int: #Altura del nodo
+    def get_niveles(self) -> int: #Obtiene el nivel del nodo
         if self.left is not None and self.right is not None:
             return 1 + max(self.left.get_niveles(), self.right.get_niveles())
         elif self.left is not None:
@@ -128,6 +128,17 @@ class Tree:
                 pad = p
                 p = p.right
         return p, pad
+    
+    def searchOnlyHim(self, elem: Any) -> Optional["Nodo"]:
+        p = self.root
+        while p is not None:
+            if elem == p.data:
+                return p
+            elif elem < p.data:
+                p = p.left
+            else:
+                p = p.right
+        return p
     
     def search_nodos_categoria_rango(self, categoria: str, rango1: float, rango2: float) -> List["Nodo"]:
         # Lista para almacenar los nodos que cumplen con los criterios

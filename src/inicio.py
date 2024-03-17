@@ -47,8 +47,40 @@ def main() -> None:
             #Operación para buscar un nodo
             node_data = input("Ingrese el dato del nodo a buscar: ")
             found_node = sample_tree.search(node_data)
+        
             if found_node:
                 print("El nodo se encuentra en el árbol.")
+                print("Desea realizar mas acciones con este nodo? (S/N)")
+                moreop= input("\n->Ingrese una opción: ")
+                if(moreop=="s" or moreop=="S"):
+                    print("a. Obtener nivel del nodo")
+                    print("b. Obtener altura del nodo")
+                    print("c. Obtener el padre del nodo")
+                    print("d. Obtener el abuelo del nodo")
+                    print("e. Obtener el tío del nodo")
+                    opp = input("\n->Ingrese una opción: ")
+                    match(opp):
+                        case "a":
+                            print("El nivel del nodo es: ", found_node[0].get_niveles())
+                        case "b":
+                            print("La altura del nodo es: ", found_node[0].get_niveles()+1)
+                        case "c":
+                            if(sample_tree.search_daddy(found_node[0].data)==None):
+                                print("El nodo no tiene padre.")
+                            else:
+                                print("El padre del nodo es: ", sample_tree.search_daddy(found_node[0].data).data)
+                        case "d":
+                            if(sample_tree.search_granpa(found_node[0].data)==None):
+                                print("El nodo no tiene abuelo.")
+                            else:
+                                print("El abuelo del nodo es: ", sample_tree.search_granpa(found_node[0].data).data)
+                        case "e":
+                            if(sample_tree.search_tio(found_node[0].data)==None):
+                                print("El nodo no tiene tío.")
+                            else:
+                                print("El tío del nodo es: ", sample_tree.search_tio(found_node[0].data).data)
+                            
+                            
             else:
                 print("El nodo no se encuentra en el árbol.")
 
