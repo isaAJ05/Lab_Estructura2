@@ -124,6 +124,42 @@ class Tree:
                 p = p.right
         return p, pad
     
+ 
+    def level_order_recursive(self,root:Any, level=0)->None:
+        if root is None:
+            print("El árbol está vacío.")
+            return
+        if level == 0:
+            print("Nivel 0:", root.data)
+        
+        if root.left:
+            print(f"Nivel {level + 1} (izquierda):", root.left.data)
+            self.level_order_recursive(root.left, level + 1)
+
+        if root.right:
+            print(f"Nivel {level + 1} (derecha):", root.right.data)
+            self.level_order_recursive(root.right, level + 1)
+         
+    def level_order(self) -> None:
+        if self.root is None:
+            print("El árbol está vacío.")
+            return
+        q = Cola()
+        q.add(self.root)
+        self.ayuda(q)
+    
+    def ayuda(self,q:Cola) -> None:
+        if q.is_empty():
+            return None
+        else:
+            p = q.remove()
+            print(p.data)
+            if p.left is not None:
+                q.add(p.left)
+            if p.right is not None:
+                q.add(p.right)
+            self.ayuda(q)
+                   
     def searchOnlyHim(self, elem: Any) -> Optional["Nodo"]:
         p = self.root
         while p is not None:

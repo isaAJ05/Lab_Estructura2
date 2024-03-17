@@ -28,8 +28,9 @@ def main() -> None:
         print("1. Insertar nodo")
         print("2. Eliminar nodo")
         print("3. Buscar nodo")
-        print("4. Buscar nodos por categoría y rango de peso")  
-        print("5. Salir")
+        print("4. Buscar nodos por categoría y rango de peso") 
+        print("5. Recorrido por niveles del árbol ") 
+        print("6. Salir")
         option = input("\n->Ingrese una opción: ")
 
         if option == "1":
@@ -149,8 +150,11 @@ def main() -> None:
                     moreop= input("\n->Ingrese una opción: ")
             else:
                 print("No se encontraron nodos con la categoría y peso especificados.")
-
         elif option == "5":
+            #Recorrido por niveles del árbol
+            print("Recorrido por niveles del árbol:")
+            sample_tree.level_order()
+        elif option == "6":
             #Salir del programa
             print("¡Muchas gracias por implementar el programa!")
             break
