@@ -227,87 +227,87 @@ class Tree:
     
     #Métodos para rotar el árbol
     
-    def _rotate_left(self, x): #se ingresa nodo desbalanceado (x)
-        y = x.right #se obtiene el hijo derecho del nodo desbalanceado
-        T2 = y.left if y else None #se obtiene el hijo izquierdo del hijo derecho del nodo desbalanceado
+    def _rotate_left(self, desequilibrado): #se ingresa nodo desbalanceado ()
+        nod = desequilibrado.right #se obtiene el hijo derecho del nodo desbalanceado
+        T2 = nod.left if desequilibrado else None #se obtiene el hijo izquierdo del hijo derecho del nodo desbalanceado
         
-        if y: #Si el hijo derecho del nodo desbalanceado no es nulo
-            y.left = x #Se cambia el hijo izquierdo del hijo derecho del nodo desbalanceado por el nodo desbalanceado
-        x.right = T2 #Se cambia el hijo derecho del nodo desbalanceado por el hijo izquierdo del hijo derecho del nodo desbalanceado
+        if nod: #Si el hijo derecho del nodo desbalanceado no es nulo
+            nod.left = desequilibrado #Se cambia el hijo izquierdo del hijo derecho del nodo desbalanceado por el nodo desbalanceado
+        desequilibrado.right = T2 #Se cambia el hijo derecho del nodo desbalanceado por el hijo izquierdo del hijo derecho del nodo desbalanceado
 
-        x.height = 1 + max(self._get_height(x.left), self._get_height(x.right)) #Se actualiza la altura del nodo desbalanceado
-        if y:
-            y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
+        desequilibrado.height = 1 + max(self._get_height(desequilibrado.left), self._get_height(desequilibrado.right)) #Se actualiza la altura del nodo desbalanceado
+        if nod: #Si el hijo derecho del nodo desbalanceado no es nulo
+            nod.height = 1 + max(self._get_height(nod.left), self._get_height(nod.right))
 
-        return y
+        return nod
 
-    def _rotate_right(self, y):
-        x = y.left
-        T2 = x.right if x else None
+    def _rotate_right(self, dese): #se ingresa nodo desbalanceado
+        n = dese.left #se obtiene el hijo izquierdo del nodo desbalanceado
+        T2 = n.right if  n else None #se obtiene el hijo derecho del hijo izquierdo del nodo desbalanceado
 
-        if x:
-            x.right = y
-        y.left = T2
+        if n: #Si el hijo izquierdo del nodo desbalanceado no es nulo
+            n.right = dese #Se cambia el hijo derecho del hijo izquierdo del nodo desbalanceado por el nodo desbalanceado
+        dese.left = T2 #Se cambia el hijo izquierdo del nodo desbalanceado por el hijo derecho del hijo izquierdo del nodo desbalanceado
 
-        y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
-        if x:
-            x.height = 1 + max(self._get_height(x.left), self._get_height(x.right))
+        dese.height = 1 + max(self._get_height(dese.left), self._get_height(dese.right)) #Se actualiza la altura del nodo desbalanceado
+        if n: #Si el hijo izquierdo del nodo desbalanceado no es nulo
+            n.height = 1 + max(self._get_height(n.left), self._get_height(n.right)) #Se actualiza la altura del hijo izquierdo del nodo desbalanceado
 
-        return x
+        return n #Se retorna el nodo desbalanceado
 
-    def _get_height(self, node):
-        if not node:
+    def _get_height(self, node): #Método para obtener la altura del nodo
+        if not node: #Si el nodo es nulo, se retorna 0
             return 0
-        return node.height
+        return node.height #Se retorna la altura del nodo
 
-    def _balance(self, nodo):
+    def _balance(self, nodo):   #Método para balancear el árbol
         if nodo is None:
             return nodo
-        if nodo.factor_balance > 1:
-            if nodo.right is not None and nodo.right.factor_balance < 0:
-                nodo.right = self._rotate_right(nodo.right)
-            nodo = self._rotate_left(nodo)
-        elif nodo.factor_balance < -1:
-            if nodo.left is not None and nodo.left.factor_balance > 0:
-                nodo.left = self._rotate_left(nodo.left)
-            nodo = self._rotate_right(nodo)
+        if nodo.factor_balance > 1: #Si el factor de balanceo es mayor que 1
+            if nodo.right is not None and nodo.right.factor_balance < 0:    #Si el hijo derecho del nodo no es nulo y el factor de balanceo del hijo derecho es menor que 0
+                nodo.right = self._rotate_right(nodo.right) #Se rota a la derecha el hijo derecho del nodo
+            nodo = self._rotate_left(nodo) #Se rota a la izquierda el nodo
+        elif nodo.factor_balance < -1: #Si el factor de balanceo es menor que -1
+            if nodo.left is not None and nodo.left.factor_balance > 0:  #Si el hijo izquierdo del nodo no es nulo y el factor de balanceo del hijo izquierdo es mayor que 0
+                nodo.left = self._rotate_left(nodo.left) #Se rota a la izquierda el hijo izquierdo del nodo
+            nodo = self._rotate_right(nodo) #Se rota a la derecha el nodo
         return nodo
 
-    def _rotate_left_right(self, nodo):
-        if nodo is not None:
-            nodo.left = self._rotate_left(nodo.left)
-        return self._rotate_right(nodo)
+    def _rotate_left_right(self, nodo): #Método para rotar a la izquierda-derecha
+        if nodo is not None: #Si el nodo no es nulo
+            nodo.left = self._rotate_left(nodo.left)    #Se rota a la izquierda el hijo izquierdo del nodo
+        return self._rotate_right(nodo) #Se rota a la derecha el nodo
 
-    def _rotate_right_left(self, nodo):
-        if nodo is not None:
-            nodo.right = self._rotate_right(nodo.right)
-        return self._rotate_left(nodo)
+    def _rotate_right_left(self, nodo): #Método para rotar a la derecha-izquierda
+        if nodo is not None: #Si el nodo no es nulo
+            nodo.right = self._rotate_right(nodo.right) #Se rota a la derecha el hijo derecho del nodo
+        return self._rotate_left(nodo) #Se rota a la izquierda el nodo
     
         
 
-    def delete(self, data):
-        self.root = self._delete(self.root, data)
+    def delete(self, data):     #Método para eliminar un nodo
+        self.root = self._delete(self.root, data)   #Se llama al método _delete para eliminar el nodo
 
-    def _delete(self, root, data):
+    def _delete(self, root, data):  #Método para eliminar un nodo
         # Paso 1: eliminación estándar en un ABB
-        if not root:
+        if not root: #Si el nodo es nulo, se retorna el nodo
             return root
-        elif data < root.data:
-            root.left = self._delete(root.left, data)
-        elif data > root.data:
-            root.right = self._delete(root.right, data)
-        else:
-            if root.left is None:
-                temp = root.right
-                root = None
-                return temp
-            elif root.right is None:
-                temp = root.left
-                root = None
-                return temp
-            temp = self._get_min_value_node(root.right)
-            root.data = temp.data
-            root.right = self._delete(root.right, temp.data)
+        elif data < root.data: #Si el dato es menor que el dato del nodo, se va al hijo izquierdo
+            root.left = self._delete(root.left, data)   #Se llama recursivamente al método _delete para eliminar el nodo
+        elif data > root.data: #Si el dato es mayor que el dato del nodo, se va al hijo derecho
+            root.right = self._delete(root.right, data) #Se llama recursivamente al método _delete para eliminar el nodo
+        else:  #Si el dato es igual al dato del nodo
+            if root.left is None:   #Si el hijo izquierdo del nodo es nulo
+                temp = root.right   #Se guarda el hijo derecho del nodo
+                root = None #Se elimina el nodo
+                return temp #Se retorna el hijo derecho del nodo
+            elif root.right is None:   #Si el hijo derecho del nodo es nulo
+                temp = root.left   #Se guarda el hijo izquierdo del nodo
+                root = None     #Se elimina el nodo
+                return temp    #Se retorna el hijo izquierdo del nodo
+            temp = self._get_min_value_node(root.right) #Se obtiene el nodo con el valor mínimo del subárbol derecho
+            root.data = temp.data  #Se cambia el dato del nodo por el dato del nodo con el valor mínimo del subárbol derecho
+            root.right = self._delete(root.right, temp.data) #Se llama recursivamente al método _delete para eliminar el nodo con el valor mínimo del subárbol derecho
 
         # Paso 2: actualización de la altura del nodo padre
         root.height = 1 + max(self._get_height(root.left), self._get_height(root.right))
