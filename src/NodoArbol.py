@@ -136,8 +136,8 @@ class Tree:
         q = Cola() #Se inicializa una cola
         q.add(self.root) #Se agrega la raíz a la cola
         self.ayuda(q) #Se llama al método ayuda para recorrer el árbol 
-        self.postorder() #Se llama al método postorder para recorrer el árbol
-       
+      #  self.postorder() #Se llama al método postorder para verificar el factor de balanceo de cada nodo
+    
     def ayuda(self,q:Cola) -> None: #Método para recorrer el árbol (ayuda al método level_order)
         if q.is_empty(): #Si la cola está vacía (caso base)
             return None
@@ -278,29 +278,29 @@ class Tree:
     
         
 
-    def delete(self, data):     #Método para eliminar un nodo
-        self.root = self._delete(self.root, data)   #Se llama al método _delete para eliminar el nodo
+    def delete(self, data):
+        self.root = self._delete(self.root, data)
 
-    def _delete(self, root, data):  #Método para eliminar un nodo
+    def _delete(self, root, data):
         # Paso 1: eliminación estándar en un ABB
-        if not root: #Si el nodo es nulo, se retorna el nodo
+        if not root:
             return root
-        elif data < root.data: #Si el dato es menor que el dato del nodo, se va al hijo izquierdo
-            root.left = self._delete(root.left, data)   #Se llama recursivamente al método _delete para eliminar el nodo
-        elif data > root.data: #Si el dato es mayor que el dato del nodo, se va al hijo derecho
-            root.right = self._delete(root.right, data) #Se llama recursivamente al método _delete para eliminar el nodo
-        else:  #Si el dato es igual al dato del nodo
-            if root.left is None:   #Si el hijo izquierdo del nodo es nulo
-                temp = root.right   #Se guarda el hijo derecho del nodo
-                root = None #Se elimina el nodo
-                return temp #Se retorna el hijo derecho del nodo
-            elif root.right is None:   #Si el hijo derecho del nodo es nulo
-                temp = root.left   #Se guarda el hijo izquierdo del nodo
-                root = None     #Se elimina el nodo
-                return temp    #Se retorna el hijo izquierdo del nodo
-            temp = self._get_min_value_node(root.right) #Se obtiene el nodo con el valor mínimo del subárbol derecho
-            root.data = temp.data  #Se cambia el dato del nodo por el dato del nodo con el valor mínimo del subárbol derecho
-            root.right = self._delete(root.right, temp.data) #Se llama recursivamente al método _delete para eliminar el nodo con el valor mínimo del subárbol derecho
+        elif data < root.data:
+            root.left = self._delete(root.left, data)
+        elif data > root.data:
+            root.right = self._delete(root.right, data)
+        else:
+            if root.left is None:
+                temp = root.right
+                root = None
+                return temp
+            elif root.right is None:
+                temp = root.left
+                root = None
+                return temp
+            temp = self._get_min_value_node(root.right)
+            root.data = temp.data
+            root.right = self._delete(root.right, temp.data)
 
         # Paso 2: actualización de la altura del nodo padre
         root.height = 1 + max(self._get_height(root.left), self._get_height(root.right))
@@ -329,57 +329,31 @@ class Tree:
 
         return root
 
-    def _get_min_value_node(self, root): #Método para obtener el nodo con el valor mínimo
-        if root is None or root.left is None: #Si el nodo es nulo o el hijo izquierdo del nodo es nulo, se retorna el nodo
-            return root     
-        return self._get_min_value_node(root.left) #Se llama recursivamente al método para obtener el nodo con el valor mínimo
+    def _get_min_value_node(self, root):
+        if root is None or root.left is None:
+            return root
+        return self._get_min_value_node(root.left)
     
     def graficar(self) -> None: #Método para graficar el árbol
-            # Crea un objeto de gráfico
-            dot = graphviz.Digraph(comment='Árbol de Búsqueda Binaria')
+        # Crea un objeto de gráfico
+        dot = graphviz.Digraph(comment='Árbol de Búsqueda Binaria')
 
-            # Crea una lista para almacenar todas las rutas de archivos temporales
-            temp_files = []
+        # Recorre el árbol y agrega nodos y aristas
+        def add_nodes_and_edges(node, parent=None):
+            if node:
+                # Poner factor de balanceo de cada nodo en el gráfico
+                balance_factor = node.calcular_factor_balance()
+                dot.node(str(node.data), label=f"{str(node.data)}\n{balance_factor}", shape='circle', fontname="Arial Bold", fontcolor='red', labelloc='b')
+                
+                if parent:
+                    dot.edge(str(parent.data), str(node.data))
+                add_nodes_and_edges(node.left, node)
+                add_nodes_and_edges(node.right, node)
 
-            # Recorre el árbol y agrega nodos y aristas
-            def add_nodes_and_edges(node, parent=None):
-                if node:
-                    
-                    img_path = node.file_path
+        add_nodes_and_edges(self.root)
 
-                    img = Image.open(img_path)
-
-                    # Crea un archivo temporal para la imagen PNG
-                    fd, path = tempfile.mkstemp(suffix=".png")
-                    temp_files.append(path)  # Añadir la ruta a la lista
-                    try:
-                        with os.fdopen(fd, 'wb') as tmp:
-                            # Guardar la imagen en formato PNG
-                            img.save(tmp, "PNG")
-
-                        # Agrega el nodo con la imagen como etiqueta
-                        dot.node(str(node.data), label=str(node.data), image=path, shape='none', fontname="Arial Bold",
-                                 fontcolor='red', labelloc='b')
-                         # Poner factor de balanceo de cada nodo en el gráfico
-                        balance_factor = node.calcular_factor_balance()
-                        dot.node(str(node.data), label=f"{str(node.data)}\n{balance_factor}", image=path, shape='none', fontname="Arial Bold", fontcolor='red', labelloc='b')
-                        
-                        if parent:
-                            dot.edge(str(parent.data), str(node.data))
-                        add_nodes_and_edges(node.left, node)
-                        add_nodes_and_edges(node.right, node)
-
-                    except Exception as e:
-                        print(f"Error: {e}")
-
-            add_nodes_and_edges(self.root)
-
-            # Guarda el código fuente en un archivo
-            dot.render('arbol-binario.gv', view=True)
-
-            # Ahora que hemos terminado con el gráfico, podemos eliminar los archivos temporales
-            for path in temp_files:
-                os.remove(path)
+        # Guarda el código fuente en un archivo
+        dot.render('arbol-binario.gv', view=True)
 
     def altura(self) -> int: #Altura del arbol
         p=self.root #Se inicializa el nodo
@@ -483,7 +457,7 @@ class Tree:
     def balancear(self, p: "Nodo") -> "Nodo": #Método para balancear el árbol
         if p is not None:
             p.calcular_factor_balance() 
-            
+            print("---Factor de balanceo ",p.data,": ", p.factor_balance)  #Se imprime el factor de balanceo del nodo
             if p.factor_balance > 1: #Si el factor de balanceo es mayor que 1
                 if p.left is not None and p.left.factor_balance >= 0: #Si el hijo izquierdo del nodo no es nulo y el factor de balanceo del hijo izquierdo es mayor o igual que 0
                     p = self.rot_der(p)  #Se rota a la derecha el nodo
@@ -590,12 +564,12 @@ class Tree:
                 self.postorder(node.left) #Se llama recursivamente al método postorder para recorrer el subárbol izquierdo
             if node.right is not None:
                 self.postorder(node.right) #Se llama recursivamente al método postorder para recorrer el subárbol derecho
-            print("Factor de balance de ",node.data,": ", node.factor_balance) #Se imprime el factor de balanceo del nodo
+         #   print("Factor de balance de ",node.data,": ", node.factor_balance) #Se imprime el factor de balanceo del nodo
             node.actualizar_factor_balance() #Se actualiza el factor de balanceo del nodo
             if node.factor_balance == 2 or node.factor_balance == -2: #Si el factor de balanceo es 2 o -2
-               # print("El nodo ", node.data, " está desequilibrado") #Se imprime que el nodo está desequilibrado
+              #  print("El nodo ", node.data, " está desequilibrado") #Se imprime que el nodo está desequilibrado
                 self.__balancear(node) #Se balancea el nodo
-           # if node.factor_balance == 1 or node.factor_balance == -1 or node.factor_balance == 0: #Si el factor de balanceo es 1, -1 o 0
-               # print("El nodo ", node.data, " está equilibrado")   #Se imprime que el nodo está equilibrado
+          #  if node.factor_balance == 1 or node.factor_balance == -1 or node.factor_balance == 0: #Si el factor de balanceo es 1, -1 o 0
+              #  print("El nodo ", node.data, " está equilibrado")   #Se imprime que el nodo está equilibrado
             
 

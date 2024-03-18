@@ -1,114 +1,86 @@
 // Árbol de Búsqueda Binaria
 digraph {
-	carsgraz_177 [label=carsgraz_177 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpx4g_kk0o.png" labelloc=b shape=none]
 	carsgraz_177 [label="carsgraz_177
-1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpx4g_kk0o.png" labelloc=b shape=none]
-	bike_110 [label=bike_110 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpbn6iv5l2.png" labelloc=b shape=none]
+1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	bike_110 [label="bike_110
--1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpbn6iv5l2.png" labelloc=b shape=none]
+-1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	carsgraz_177 -> bike_110
-	0177 [label=0177 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp3y8gupud.png" labelloc=b shape=none]
 	0177 [label="0177
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp3y8gupud.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	bike_110 -> 0177
-	0129 [label=0129 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp0273lefd.png" labelloc=b shape=none]
 	0129 [label="0129
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp0273lefd.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	0177 -> 0129
-	0038 [label=0038 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpxcskpnk_.png" labelloc=b shape=none]
 	0038 [label="0038
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpxcskpnk_.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	0129 -> 0038
-	0130 [label=0130 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpfkn8hqo9.png" labelloc=b shape=none]
 	0130 [label="0130
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpfkn8hqo9.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	0129 -> 0130
-	bike_072 [label=bike_072 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmplzg6f6ew.png" labelloc=b shape=none]
 	bike_072 [label="bike_072
-1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmplzg6f6ew.png" labelloc=b shape=none]
+1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	0177 -> bike_072
-	bike_107 [label=bike_107 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp0w19qjx7.png" labelloc=b shape=none]
 	bike_107 [label="bike_107
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp0w19qjx7.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	bike_072 -> bike_107
-	carsgraz_100 [label=carsgraz_100 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpft_ui5up.png" labelloc=b shape=none]
 	carsgraz_100 [label="carsgraz_100
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpft_ui5up.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	bike_110 -> carsgraz_100
-	bike_238 [label=bike_238 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpkqnwhd6_.png" labelloc=b shape=none]
 	bike_238 [label="bike_238
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpkqnwhd6_.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	carsgraz_100 -> bike_238
-	carsgraz_127 [label=carsgraz_127 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpcrepjvvw.png" labelloc=b shape=none]
 	carsgraz_127 [label="carsgraz_127
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpcrepjvvw.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	carsgraz_100 -> carsgraz_127
-	"dog.161" [label="dog.161" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpwcvvhwgd.png" labelloc=b shape=none]
 	"dog.161" [label="dog.161
-1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpwcvvhwgd.png" labelloc=b shape=none]
+1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	carsgraz_177 -> "dog.161"
-	"cat.142" [label="cat.142" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpri99rs1o.png" labelloc=b shape=none]
 	"cat.142" [label="cat.142
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpri99rs1o.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"dog.161" -> "cat.142"
-	carsgraz_354 [label=carsgraz_354 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpmwt87984.png" labelloc=b shape=none]
 	carsgraz_354 [label="carsgraz_354
-1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpmwt87984.png" labelloc=b shape=none]
+1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"cat.142" -> carsgraz_354
-	"cat.100" [label="cat.100" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpi0lgl2m_.png" labelloc=b shape=none]
 	"cat.100" [label="cat.100
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpi0lgl2m_.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	carsgraz_354 -> "cat.100"
-	"cat.72" [label="cat.72" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmplzwg53sf.png" labelloc=b shape=none]
 	"cat.72" [label="cat.72
--1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmplzwg53sf.png" labelloc=b shape=none]
+-1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"cat.142" -> "cat.72"
-	"cat.153" [label="cat.153" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp8tzt53nd.png" labelloc=b shape=none]
 	"cat.153" [label="cat.153
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp8tzt53nd.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"cat.72" -> "cat.153"
-	"horse-42" [label="horse-42" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp7vusbllz.png" labelloc=b shape=none]
 	"horse-42" [label="horse-42
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp7vusbllz.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"dog.161" -> "horse-42"
-	"dog.73" [label="dog.73" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpn1m6x5he.png" labelloc=b shape=none]
 	"dog.73" [label="dog.73
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpn1m6x5he.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"horse-42" -> "dog.73"
-	"dog.60" [label="dog.60" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpz0ywpg0a.png" labelloc=b shape=none]
 	"dog.60" [label="dog.60
--1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpz0ywpg0a.png" labelloc=b shape=none]
+-1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"dog.73" -> "dog.60"
-	"dog.165" [label="dog.165" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpt9s3prvt.png" labelloc=b shape=none]
 	"dog.165" [label="dog.165
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpt9s3prvt.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"dog.60" -> "dog.165"
-	"horse-198" [label="horse-198" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp67z6swbd.png" labelloc=b shape=none]
 	"horse-198" [label="horse-198
--1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp67z6swbd.png" labelloc=b shape=none]
+-1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"dog.73" -> "horse-198"
-	"horse-139" [label="horse-139" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpxv_vbtri.png" labelloc=b shape=none]
 	"horse-139" [label="horse-139
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpxv_vbtri.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"horse-198" -> "horse-139"
-	"rider-107" [label="rider-107" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpnn9uikq0.png" labelloc=b shape=none]
 	"rider-107" [label="rider-107
-1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpnn9uikq0.png" labelloc=b shape=none]
+1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"horse-42" -> "rider-107"
-	"horse-9" [label="horse-9" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpiwm_553z.png" labelloc=b shape=none]
 	"horse-9" [label="horse-9
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpiwm_553z.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"rider-107" -> "horse-9"
-	"rider-201" [label="rider-201" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp4vgvy625.png" labelloc=b shape=none]
 	"rider-201" [label="rider-201
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp4vgvy625.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"rider-107" -> "rider-201"
-	"rider-125" [label="rider-125" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpniwiuhp2.png" labelloc=b shape=none]
 	"rider-125" [label="rider-125
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpniwiuhp2.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"rider-201" -> "rider-125"
-	"rider-37" [label="rider-37" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp_xgmosn7.png" labelloc=b shape=none]
 	"rider-37" [label="rider-37
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp_xgmosn7.png" labelloc=b shape=none]
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"rider-201" -> "rider-37"
 }
