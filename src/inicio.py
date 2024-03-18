@@ -139,6 +139,7 @@ def main() -> None:
                                 found = nodo # Si el nodo es válido, lo almacena
                                 break
                         if found == None:
+                            
                             print("El nodo no se encuentra en la lista de nodos encontrados.")
                             print ("\n Ingrese correctamente el nombre del nodo con el que desea trabajar")
                             name = input("->Ingrese nombre: ")
@@ -160,19 +161,22 @@ def main() -> None:
                         case "c":
                             # Obtener el padre del nodo - si existe
                             if(sample_tree.search_daddy(found.data)==None):
-                                print("El nodo no tiene padre.")
+                                pass
+                                #print("El nodo no tiene padre.")
                             else:
                                 print("El padre del nodo es: ", sample_tree.search_daddy(found.data).data)
                         case "d":
                             # Obtener el abuelo del nodo - si existe
                             if(sample_tree.search_granpa(found.data)==None):
-                                print("El nodo no tiene abuelo.")
+                                pass
+                                #print("El nodo no tiene abuelo.")
                             else:
                                 print("El abuelo del nodo es: ", sample_tree.search_granpa(found.data).data)
                         case "e":
                             # Obtener el tío del nodo - si existe
                             if(sample_tree.search_tio(found.data)==None):
-                                print("El nodo no tiene tío.")
+                                pass
+                                #print("El nodo no tiene tío.")
                             else:
                                 print("El tío del nodo es: ", sample_tree.search_tio(found.data).data)
                     print("\n Desea realizar mas acciones con algun nodo? (S/N)")
