@@ -449,11 +449,7 @@ class Tree:
                         p = self.rot_der_izq(p)
 
                 p.calcular_factor_balance()
-                if(p.factor_balance <= 1 and p.factor_balance >= -1):
-                    print("El nodo ", p.data, " ya se balanceó: ", p.factor_balance)
-                elif(p.factor_balance > 1 and p.factor_balance < -1):
-                    print("nodo: ", p.data, " balance: ", p.factor_balance)
-                    print("NO FUNCIONAAAAA")
+                
 
                 
                 return p
