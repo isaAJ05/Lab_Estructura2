@@ -336,12 +336,12 @@ class Tree:
 
         return root
 
-    def _get_min_value_node(self, root):
-        if root is None or root.left is None:
-            return root
-        return self._get_min_value_node(root.left)
+    def _get_min_value_node(self, root): #Método para obtener el nodo con el valor mínimo
+        if root is None or root.left is None: #Si el nodo es nulo o el hijo izquierdo del nodo es nulo, se retorna el nodo
+            return root     
+        return self._get_min_value_node(root.left) #Se llama recursivamente al método para obtener el nodo con el valor mínimo
     
-    def graficar(self) -> None:
+    def graficar(self) -> None: #Método para graficar el árbol
             # Crea un objeto de gráfico
             dot = graphviz.Digraph(comment='Árbol de Búsqueda Binaria')
 
@@ -389,22 +389,22 @@ class Tree:
                 os.remove(path)
 
     def altura(self) -> int: #Altura del arbol
-        p=self.root
-        if p is None:
-            return 0
+        p=self.root #Se inicializa el nodo
+        if p is None: #Si el nodo es nulo, se retorna 0
+            return 0    
         else:
-            alt_left = self.altura(p.left)
-            alt_right = self.altura(p.right)
-            return max(alt_left, alt_right) + 1
+            alt_left = self.altura(p.left) #Se obtiene la altura del subárbol izquierdo
+            alt_right = self.altura(p.right) #Se obtiene la altura del subárbol derecho
+            return max(alt_left, alt_right) + 1 #Se retorna el máximo entre la altura del subárbol izquierdo y derecho más 1
 
     def get_nivel(self,nodo:Any) -> int: #Obtiene el nivel del nodo
-        p=self.root
-        c=0
-        while p.data!=nodo.data:
-            c+=1
-            if nodo.data<p.data:
-                p=p.left
-            else:
+        p=self.root #Se inicializa el nodo
+        c=0 #Se inicializa el contador en 0 
+        while p.data!=nodo.data: #Mientras el dato del nodo sea diferente al dato del nodo
+            c+=1 #Se aumenta el contador
+            if nodo.data<p.data: #Si el dato del nodo es menor que el dato del nodo (izq), se va al hijo izquierdo
+                p=p.left  
+            else: #Si el dato del nodo es mayor que el dato del nodo (der), se va al hijo derecho
                 p=p.right
         return c
     
@@ -424,27 +424,27 @@ class Tree:
             
     #Devuelve el padre de un nodo
     def search_daddy(self, data_s: Any) -> Optional["Nodo"]: #Busca el padre de un nodo
-        p, pad = self.root, None
-        s, flag = Stack(), False
-        while (p is not None or not s.is_empty()) and not flag:
-            if p is not None:
-                if p.data == data_s:
-                    if pad is not None:
-                        return pad
-                    flag = True
-                else:
-                    s.add(p)
-                    pad = p
-                    p = p.left
-            else:
-                p = s.remove()
-                pad = p
-                p = p.right
+        p, pad = self.root, None #Se inicializa el nodo y su padre
+        s, flag = Stack(), False #Se inicializa una pila y un flag en False
+        while (p is not None or not s.is_empty()) and not flag: #Mientras el nodo no sea nulo o la pila no esté vacía y el flag sea falso
+            if p is not None: #Si el nodo no es nulo
+                if p.data == data_s: #Si el dato del nodo es igual al dato del nodo buscado
+                    if pad is not None: #Si el padre no es nulo, se retorna el padre
+                        return pad  
+                    flag = True #Se cambia el flag a verdadero
+                else: #Si el dato del nodo no es igual al dato del nodo buscado
+                    s.add(p) #Se agrega el nodo a la pila
+                    pad = p #Se actualiza el padre
+                    p = p.left #Se va al hijo izquierdo
+            else: #Si el nodo es nulo
+                p = s.remove() #Se remueve el nodo de la pila
+                pad = p #Se actualiza el padre
+                p = p.right #Se va al hijo derecho
 
-        if not flag or pad is None:
-            return None
+        if not flag or pad is None: #Si el flag es falso o el padre es nulo, se retorna None
+            return None 
 
-    def find_sibling_ayudita(self, data_s: Any) -> Optional["Nodo"]:
+    def find_sibling_ayudita(self, data_s: Any) -> Optional["Nodo"]: #Método para buscar el hermano de un nodo
         parent = self.search_daddy(data_s) #Se busca el padre del nodo
         if parent is None: #Si no se encuentra el padre, no tiene hermano
             return None
@@ -457,12 +457,12 @@ class Tree:
               return None
           
     #se llama originalmente a esta para buscar al Hermano de un nodo
-    def search_bro(self, data_: Any) -> None:
+    def search_bro(self, data_: Any) -> None: 
         sibling = self.find_sibling_ayudita(data_) #Se busca el hermano del nodo
         if sibling is not None:
-            print(f'The sibling of {data_!r} is {sibling.data!r}')
+            print(f'The sibling of {data_!r} is {sibling.data!r}') #Si se encuentra el hermano, se imprime
         else:
-            print(f'There is no sibling for {data_!r}')
+            print(f'There is no sibling for {data_!r}') #Si no se encuentra el hermano, se imprime
     
     #Buscar tio : hermano del padre
     def search_tio(self,data_s:Any)->None:
@@ -471,9 +471,9 @@ class Tree:
       if padre is not None: # Si tiene padre, se busca el hermano del padre
         tio=self.find_sibling_ayudita(padre.data)
       if tio is not None: #Si se encuentra el tio, se imprime
-        print(f' El tio de {data_s!r} es {tio.data}')
+        print(f' El tio de {data_s!r} es {tio.data}')  
       else:
-        print(f' {data_s!r} no tiene tio')     
+        print(f' {data_s!r} no tiene tio') #Si no se encuentra el tio, se imprime     
     
     # Buscar ABUELO: padre del padre
     def search_granpa(self,data_s:Any)->None:
@@ -484,125 +484,125 @@ class Tree:
       if granpa is not None: #Si se encuentra el abuelo, se imprime
         print(f' El abuelo de {data_s!r} es {granpa.data}')
       else:
-        print(f' {data_s!r} no tiene abuelo')
+        print(f' {data_s!r} no tiene abuelo') #Si no se encuentra el abuelo, se imprime
             
 
-    def balancear(self, p: "Nodo") -> "Nodo":
+    def balancear(self, p: "Nodo") -> "Nodo": #Método para balancear el árbol
         if p is not None:
-            p.calcular_factor_balance()
-            print("---Factor de balanceo ",p.data,": ", p.factor_balance) 
-            if p.factor_balance > 1:
-                if p.left is not None and p.left.factor_balance >= 0:
-                    p = self.rot_der(p) 
+            p.calcular_factor_balance() 
+            print("---Factor de balanceo ",p.data,": ", p.factor_balance)  #Se imprime el factor de balanceo del nodo
+            if p.factor_balance > 1: #Si el factor de balanceo es mayor que 1
+                if p.left is not None and p.left.factor_balance >= 0: #Si el hijo izquierdo del nodo no es nulo y el factor de balanceo del hijo izquierdo es mayor o igual que 0
+                    p = self.rot_der(p)  #Se rota a la derecha el nodo
                 else:
-                    p = self.rot_izq_der(p)
-            elif p.factor_balance < -1:
-                if p.right is not None and p.right.factor_balance <= 0:
-                    p = self.rot_izq(p)
-                else:
-                    p = self.rot_der_izq(p)
+                    p = self.rot_izq_der(p) #Se rota a la izquierda-derecha el nodo
+            elif p.factor_balance < -1: #Si el factor de balanceo es menor que -1
+                if p.right is not None and p.right.factor_balance <= 0: #Si el hijo derecho del nodo no es nulo y el factor de balanceo del hijo derecho es menor o igual que 0
+                    p = self.rot_izq(p) #Se rota a la izquierda el nodo
+                else:  
+                    p = self.rot_der_izq(p)     #Se rota a la derecha-izquierda el nodo
 
-            p.calcular_factor_balance()
+            p.calcular_factor_balance() #Se recalcula el factor de balanceo del nodo
 
-            p.left = self.balancear(p.left)
-            p.right = self.balancear(p.right)
+            p.left = self.balancear(p.left) #Se balancea el hijo izquierdo del nodo
+            p.right = self.balancear(p.right)   #Se balancea el hijo derecho del nodo
 
         return p
             
 
-    def rot_der(self, p: "Nodo") -> "Nodo": 
-        print("Rotación derecha")
-        if p.left is None:
+    def rot_der(self, p: "Nodo") -> "Nodo":  #Método para rotar a la derecha
+        print("Rotación derecha") #Se imprime el tipo de rotación
+        if p.left is None: #Si el hijo izquierdo del nodo es nulo, se retorna el nodo
             return p
-        q = p.left
-        if q.right is not None:
-            p.left = q.right
-            q.right.padre = p
-        q.right = p
-        if p.padre is not None:
-            if p.padre.left == p:
-                p.padre.left = q
+        q = p.left #Se obtiene el hijo izquierdo del nodo
+        if q.right is not None: #Si el hijo derecho del hijo izquierdo del nodo no es nulo
+            p.left = q.right #Se cambia el hijo izquierdo del nodo por el hijo derecho del hijo izquierdo del nodo
+            q.right.padre = p #Se cambia el padre del hijo derecho del hijo izquierdo del nodo por el nodo
+        q.right = p #Se cambia el hijo derecho del hijo izquierdo del nodo por el nodo
+        if p.padre is not None: #Si el padre del nodo no es nulo
+            if p.padre.left == p: #Si el nodo es el hijo izquierdo del padre, se cambia el hijo izquierdo del padre por el nodo
+                p.padre.left = q 
             else:
-                p.padre.right = q
-        q.padre = p.padre
-        p.padre = q
-        p.actualizar_factor_balance()
-        q.actualizar_factor_balance()
+                p.padre.right = q #Si el nodo es el hijo derecho del padre, se cambia el hijo derecho del padre por el nodo
+        q.padre = p.padre #Se cambia el padre del nodo por el padre del nodo
+        p.padre = q #Se cambia el padre del nodo por el nodo
+        p.actualizar_factor_balance() #Se actualiza el factor de balanceo del nodo
+        q.actualizar_factor_balance() #Se actualiza el factor de balanceo del nodo
         return q
 
-    def rot_izq(self, p: "Nodo") -> "Nodo":
-        print("Rotación izquierda")
-        if p.right is None:
+    def rot_izq(self, p: "Nodo") -> "Nodo": #Método para rotar a la izquierda
+        print("Rotación izquierda") #Se imprime el tipo de rotación
+        if p.right is None: #Si el hijo derecho del nodo es nulo, se retorna el nodo
             return p
-        q = p.right
-        if q.left is not None:
-            p.right = q.left
-            q.left.padre = p
-        q.left = p
-        if p.padre is not None:
-            if p.padre.left == p:
-                p.padre.left = q
+        q = p.right #Se obtiene el hijo derecho del nodo
+        if q.left is not None: #Si el hijo izquierdo del hijo derecho del nodo no es nulo
+            p.right = q.left #Se cambia el hijo derecho del nodo por el hijo izquierdo del hijo derecho del nodo
+            q.left.padre = p #Se cambia el padre del hijo izquierdo del hijo derecho del nodo por el nodo
+        q.left = p #Se cambia el hijo izquierdo del hijo derecho del nodo por el nodo
+        if p.padre is not None: #Si el padre del nodo no es nulo
+            if p.padre.left == p: #Si el nodo es el hijo izquierdo del padre, se cambia el hijo izquierdo del padre por el nodo
+                p.padre.left = q 
             else:
-                p.padre.right = q
-        q.padre = p.padre
-        p.padre = q
-        p.actualizar_factor_balance()
-        q.actualizar_factor_balance()
+                p.padre.right = q #Si el nodo es el hijo derecho del padre, se cambia el hijo derecho del padre por el nodo
+        q.padre = p.padre #Se cambia el padre del nodo por el padre del nodo
+        p.padre = q #Se cambia el padre del nodo por el nodo
+        p.actualizar_factor_balance() #Se actualiza el factor de balanceo del nodo
+        q.actualizar_factor_balance() 
         return q
 
-    def rot_izq_der(self, p: "Nodo") -> "Nodo":
-        print("Rotación izquierda-derecha")
-        if p.left is not None:
-            p.left = self.rot_izq(p.left)
-        return self.rot_der(p)
+    def rot_izq_der(self, p: "Nodo") -> "Nodo": #Método para rotar a la izquierda-derecha
+        print("Rotación izquierda-derecha") #Se imprime el tipo de rotación
+        if p.left is not None: #Si el hijo izquierdo del nodo no es nulo
+            p.left = self.rot_izq(p.left) #Se rota a la izquierda el hijo izquierdo del nodo
+        return self.rot_der(p) #Se rota a la derecha el nodo
 
-    def rot_der_izq(self, p: "Nodo") -> "Nodo":
-        print("Rotación derecha-izquierda")
-        if p.right is not None:
-            p.right = self.rot_der(p.right)
-        return self.rot_izq(p)
+    def rot_der_izq(self, p: "Nodo") -> "Nodo": #Método para rotar a la derecha-izquierda
+        print("Rotación derecha-izquierda") #Se imprime el tipo de rotación
+        if p.right is not None: #Si el hijo derecho del nodo no es nulo
+            p.right = self.rot_der(p.right) #Se rota a la derecha el hijo derecho del nodo
+        return self.rot_izq(p)  #Se rota a la izquierda el nodo
 
-    def actualizar_factores_balance(self, nodo: "Nodo") -> None:
-        while nodo is not None:
-            nodo.calcular_factor_balance()
-            nodo = nodo.padre
-    def encontrar_nodo(self, valor):
-        nodo_actual = self.root
-        while nodo_actual:
-            if valor < nodo_actual.data:
-                nodo_actual = nodo_actual.left
-            elif valor > nodo_actual.data:
+    def actualizar_factores_balance(self, nodo: "Nodo") -> None: #Método para actualizar los factores de balanceo
+        while nodo is not None: #Mientras el nodo no sea nulo
+            nodo.calcular_factor_balance() #Se calcula el factor de balanceo del nodo
+            nodo = nodo.padre #Se actualiza el nodo al padre
+    def encontrar_nodo(self, valor): #Método para encontrar un nodo
+        nodo_actual = self.root #Se inicializa el nodo actual
+        while nodo_actual: #Mientras el nodo actual no sea nulo
+            if valor < nodo_actual.data: #Si el valor es menor que el dato del nodo actual, se va al hijo izquierdo
+                nodo_actual = nodo_actual.left 
+            elif valor > nodo_actual.data: #Si el valor es mayor que el dato del nodo actual, se va al hijo derecho
                 nodo_actual = nodo_actual.right
             else:
-                return nodo_actual
+                return nodo_actual #Si el valor es igual al dato del nodo actual, se retorna el nodo actual
         return None
-    def encontrar_primer_nodo_desbalanceado(self, nodo):
-        if nodo:
-            nodo_izquierdo_desbalanceado = self.encontrar_primer_nodo_desbalanceado(nodo.left)
-            if nodo_izquierdo_desbalanceado:
-                return nodo_izquierdo_desbalanceado
-            nodo_derecho_desbalanceado = self.encontrar_primer_nodo_desbalanceado(nodo.right)
-            if nodo_derecho_desbalanceado:
-                return nodo_derecho_desbalanceado
-            nodo.calcular_factor_balance()
-            if nodo.factor_balance not in [-1, 0, 1]:
-                return nodo
-        return None
+    def encontrar_primer_nodo_desbalanceado(self, nodo): #Método para encontrar el primer nodo desbalanceado
+        if nodo: #Si el nodo no es nulo
+            nodo_izquierdo_desbalanceado = self.encontrar_primer_nodo_desbalanceado(nodo.left)  #Se busca el primer nodo desbalanceado en el hijo izquierdo
+            if nodo_izquierdo_desbalanceado: #Si se encuentra el nodo desbalanceado, se retorna
+                return nodo_izquierdo_desbalanceado     
+            nodo_derecho_desbalanceado = self.encontrar_primer_nodo_desbalanceado(nodo.right) #Se busca el primer nodo desbalanceado en el hijo derecho
+            if nodo_derecho_desbalanceado: #Si se encuentra el nodo desbalanceado, se retorna
+                return nodo_derecho_desbalanceado  
+            nodo.calcular_factor_balance() #Se calcula el factor de balanceo del nodo
+            if nodo.factor_balance not in [-1, 0, 1]: #Si el factor de balanceo no está en [-1, 0, 1], se retorna el nodo
+                return nodo 
+        return None #Si no se encuentra el nodo desbalanceado, se retorna None
 #
-    def postorder(self, node: Optional["Nodo"] = None) -> None:
-        if node is None:
+    def postorder(self, node: Optional["Nodo"] = None) -> None: #Método para recorrer el árbol en postorden
+        if node is None: #Si el nodo es nulo, se retorna
             node = self.root
-        if node is not None:
+        if node is not None: #Si el nodo no es nulo
             if node.left is not None:
-                self.postorder(node.left)
+                self.postorder(node.left) #Se llama recursivamente al método postorder para recorrer el subárbol izquierdo
             if node.right is not None:
-                self.postorder(node.right)
-            print("Factor de balance de ",node.data,": ", node.factor_balance)
-            node.actualizar_factor_balance()
-            if node.factor_balance == 2 or node.factor_balance == -2:
-                print("El nodo ", node.data, " está desequilibrado")
-                self.__balancear(node)
-            if node.factor_balance == 1 or node.factor_balance == -1 or node.factor_balance == 0:
-                print("El nodo ", node.data, " está equilibrado")
+                self.postorder(node.right) #Se llama recursivamente al método postorder para recorrer el subárbol derecho
+            print("Factor de balance de ",node.data,": ", node.factor_balance) #Se imprime el factor de balanceo del nodo
+            node.actualizar_factor_balance() #Se actualiza el factor de balanceo del nodo
+            if node.factor_balance == 2 or node.factor_balance == -2: #Si el factor de balanceo es 2 o -2
+                print("El nodo ", node.data, " está desequilibrado") #Se imprime que el nodo está desequilibrado
+                self.__balancear(node) #Se balancea el nodo
+            if node.factor_balance == 1 or node.factor_balance == -1 or node.factor_balance == 0: #Si el factor de balanceo es 1, -1 o 0
+                print("El nodo ", node.data, " está equilibrado")   #Se imprime que el nodo está equilibrado
             
 
