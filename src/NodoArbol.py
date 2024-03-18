@@ -136,6 +136,7 @@ class Tree:
         q = Cola() #Se inicializa una cola
         q.add(self.root) #Se agrega la raíz a la cola
         self.ayuda(q) #Se llama al método ayuda para recorrer el árbol 
+        self.postorder() #Se llama al método postorder para recorrer el árbol
        
     def ayuda(self,q:Cola) -> None: #Método para recorrer el árbol (ayuda al método level_order)
         if q.is_empty(): #Si la cola está vacía (caso base)
@@ -180,107 +181,100 @@ class Tree:
         traverse(self.root)
         return nodos_aprobados
 
-    def insert(self, data): #Inserta un nodo
-        self.root = self._insert(self.root, data) #Se llama al método _insert para insertar el nodo
+    def insert(self, data):
+        self.root = self._insert(self.root, data)
 
-    def _insert(self, node, data): #Método para insertar un nodo
-        if not node: #Si el nodo es nulo, se crea un nuevo nodo con el dato
+    def _insert(self, node, data):
+        if not node:
             return Nodo(data)
-        elif data < node.data: #Si el dato es menor que el dato del nodo, se va al hijo izquierdo
+        elif data < node.data:
             node.left = self._insert(node.left, data)
-        else: #Si el dato es mayor que el dato del nodo, se va al hijo derecho
+        else:
             node.right = self._insert(node.right, data)
 
-        node.height = 1 + max(self._get_height(node.left), self._get_height(node.right)) #Se actualiza la altura del nodo
+        node.height = 1 + max(self._get_height(node.left), self._get_height(node.right))
 
-        balance = self._get_balance(node) #Se calcula el factor de balanceo
+        balance = self._get_balance(node)
 
-        # Caso izquierdo simple (2, 1)
-        if balance > 1 and data < node.left.data: 
-            #Si el factor de balanceo es mayor que 1 y el dato es menor que el dato del hijo izquierdo
-            return self._rotate_left(node) #se manda el nodo desbalanceado a la rotación derecha
-
-        # Caso derecho simple (-2, -1)
-        if balance < -1 and data > node.right.data: 
-            #Si el factor de balanceo es menor que -1 y el dato es mayor que el dato del hijo derecho
+        # Caso izquierdo-izquierdo
+        if balance > 1 and data < node.left.data:
             return self._rotate_right(node)
 
-        # Caso izquierdo-derecho (2, -1)
-        if balance > 1 and data > node.left.data: 
-            #Si el factor de balanceo es mayor que 1 y el dato es mayor que el dato del hijo izquierdo
-            node.left = self._rotate_left(node.left) #Se rota a la izquierda el hijo izquierdo
-            return self._rotate_right(node) #Se rota a la derecha el nodo
+        # Caso derecho-derecho
+        if balance < -1 and data > node.right.data:
+            return self._rotate_left(node)
 
-        # Caso derecho-izquierdo (-2|1)
-        if balance < -1 and data < node.right.data: 
-            #Si el factor de balanceo es menor que -1 y el dato es menor que el dato del hijo derecho
-            node.right = self._rotate_right(node.right) #Se rota a la derecha el hijo derecho
-            return self._rotate_left(node) #Se rota a la izquierda el nodo
+        # Caso izquierdo-derecho
+        if balance > 1 and data > node.left.data:
+            node.left = self._rotate_left(node.left)
+            return self._rotate_right(node)
+
+        # Caso derecho-izquierdo
+        if balance < -1 and data < node.right.data:
+            node.right = self._rotate_right(node.right)
+            return self._rotate_left(node)
 
         return node
 
-    def _get_balance(self, node): #Método para obtener el factor de balanceo
+    def _get_balance(self, node):
         if not node:
             return 0
-        return self._get_height(node.left) - self._get_height(node.right) #Se retorna la resta de la altura del hijo izquierdo y derecho
-    
-    #Métodos para rotar el árbol
-    
-    def _rotate_left(self, desequilibrado): #se ingresa nodo desbalanceado ()
-        nod = desequilibrado.right #se obtiene el hijo derecho del nodo desbalanceado
-        T2 = nod.left if desequilibrado else None #se obtiene el hijo izquierdo del hijo derecho del nodo desbalanceado
-        
-        if nod: #Si el hijo derecho del nodo desbalanceado no es nulo
-            nod.left = desequilibrado #Se cambia el hijo izquierdo del hijo derecho del nodo desbalanceado por el nodo desbalanceado
-        desequilibrado.right = T2 #Se cambia el hijo derecho del nodo desbalanceado por el hijo izquierdo del hijo derecho del nodo desbalanceado
+        return self._get_height(node.left) - self._get_height(node.right)
+    def _rotate_left(self, x):
+        y = x.right
+        T2 = y.left if y else None
 
-        desequilibrado.height = 1 + max(self._get_height(desequilibrado.left), self._get_height(desequilibrado.right)) #Se actualiza la altura del nodo desbalanceado
-        if nod: #Si el hijo derecho del nodo desbalanceado no es nulo
-            nod.height = 1 + max(self._get_height(nod.left), self._get_height(nod.right))
+        if y:
+            y.left = x
+        x.right = T2
 
-        return nod
+        x.height = 1 + max(self._get_height(x.left), self._get_height(x.right))
+        if y:
+            y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
 
-    def _rotate_right(self, dese): #se ingresa nodo desbalanceado
-        n = dese.left #se obtiene el hijo izquierdo del nodo desbalanceado
-        T2 = n.right if  n else None #se obtiene el hijo derecho del hijo izquierdo del nodo desbalanceado
+        return y
 
-        if n: #Si el hijo izquierdo del nodo desbalanceado no es nulo
-            n.right = dese #Se cambia el hijo derecho del hijo izquierdo del nodo desbalanceado por el nodo desbalanceado
-        dese.left = T2 #Se cambia el hijo izquierdo del nodo desbalanceado por el hijo derecho del hijo izquierdo del nodo desbalanceado
+    def _rotate_right(self, y):
+        x = y.left
+        T2 = x.right if x else None
 
-        dese.height = 1 + max(self._get_height(dese.left), self._get_height(dese.right)) #Se actualiza la altura del nodo desbalanceado
-        if n: #Si el hijo izquierdo del nodo desbalanceado no es nulo
-            n.height = 1 + max(self._get_height(n.left), self._get_height(n.right)) #Se actualiza la altura del hijo izquierdo del nodo desbalanceado
+        if x:
+            x.right = y
+        y.left = T2
 
-        return n #Se retorna el nodo desbalanceado
+        y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
+        if x:
+            x.height = 1 + max(self._get_height(x.left), self._get_height(x.right))
 
-    def _get_height(self, node): #Método para obtener la altura del nodo
-        if not node: #Si el nodo es nulo, se retorna 0
+        return x
+
+    def _get_height(self, node):
+        if not node:
             return 0
-        return node.height #Se retorna la altura del nodo
+        return node.height
 
-    def _balance(self, nodo):   #Método para balancear el árbol
+    def _balance(self, nodo):
         if nodo is None:
             return nodo
-        if nodo.factor_balance > 1: #Si el factor de balanceo es mayor que 1
-            if nodo.right is not None and nodo.right.factor_balance < 0:    #Si el hijo derecho del nodo no es nulo y el factor de balanceo del hijo derecho es menor que 0
-                nodo.right = self._rotate_right(nodo.right) #Se rota a la derecha el hijo derecho del nodo
-            nodo = self._rotate_left(nodo) #Se rota a la izquierda el nodo
-        elif nodo.factor_balance < -1: #Si el factor de balanceo es menor que -1
-            if nodo.left is not None and nodo.left.factor_balance > 0:  #Si el hijo izquierdo del nodo no es nulo y el factor de balanceo del hijo izquierdo es mayor que 0
-                nodo.left = self._rotate_left(nodo.left) #Se rota a la izquierda el hijo izquierdo del nodo
-            nodo = self._rotate_right(nodo) #Se rota a la derecha el nodo
+        if nodo.factor_balance > 1:
+            if nodo.right is not None and nodo.right.factor_balance < 0:
+                nodo.right = self._rotate_right(nodo.right)
+            nodo = self._rotate_left(nodo)
+        elif nodo.factor_balance < -1:
+            if nodo.left is not None and nodo.left.factor_balance > 0:
+                nodo.left = self._rotate_left(nodo.left)
+            nodo = self._rotate_right(nodo)
         return nodo
 
-    def _rotate_left_right(self, nodo): #Método para rotar a la izquierda-derecha
-        if nodo is not None: #Si el nodo no es nulo
-            nodo.left = self._rotate_left(nodo.left)    #Se rota a la izquierda el hijo izquierdo del nodo
-        return self._rotate_right(nodo) #Se rota a la derecha el nodo
+    def _rotate_left_right(self, nodo):
+        if nodo is not None:
+            nodo.left = self._rotate_left(nodo.left)
+        return self._rotate_right(nodo)
 
-    def _rotate_right_left(self, nodo): #Método para rotar a la derecha-izquierda
-        if nodo is not None: #Si el nodo no es nulo
-            nodo.right = self._rotate_right(nodo.right) #Se rota a la derecha el hijo derecho del nodo
-        return self._rotate_left(nodo) #Se rota a la izquierda el nodo
+    def _rotate_right_left(self, nodo):
+        if nodo is not None:
+            nodo.right = self._rotate_right(nodo.right)
+        return self._rotate_left(nodo)
     
         
 
@@ -599,9 +593,9 @@ class Tree:
             print("Factor de balance de ",node.data,": ", node.factor_balance) #Se imprime el factor de balanceo del nodo
             node.actualizar_factor_balance() #Se actualiza el factor de balanceo del nodo
             if node.factor_balance == 2 or node.factor_balance == -2: #Si el factor de balanceo es 2 o -2
-                print("El nodo ", node.data, " está desequilibrado") #Se imprime que el nodo está desequilibrado
+               # print("El nodo ", node.data, " está desequilibrado") #Se imprime que el nodo está desequilibrado
                 self.__balancear(node) #Se balancea el nodo
-            if node.factor_balance == 1 or node.factor_balance == -1 or node.factor_balance == 0: #Si el factor de balanceo es 1, -1 o 0
-                print("El nodo ", node.data, " está equilibrado")   #Se imprime que el nodo está equilibrado
+           # if node.factor_balance == 1 or node.factor_balance == -1 or node.factor_balance == 0: #Si el factor de balanceo es 1, -1 o 0
+               # print("El nodo ", node.data, " está equilibrado")   #Se imprime que el nodo está equilibrado
             
 
