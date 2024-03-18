@@ -4,7 +4,7 @@ import tempfile
 from tkinter import Image
 from PIL import Image
 import os
-class Stack:
+class Stack: #Clase pila
     def __init__(self) -> None:
         self.stack: List[Any] = []
 
@@ -17,7 +17,7 @@ class Stack:
     def is_empty(self) -> bool:
         return len(self.stack) == 0
 
-class Cola:
+class Cola: #Clase cola
     def __init__(self) -> None:
         self.cola: List[Any] = []
     def add(self, elem: Any) -> None:
@@ -30,18 +30,18 @@ class Cola:
 class Nodo:
 
     def __init__(self, data: Any) -> None:
-        self.data = data
+        self.data = data #Dato del nodo(metrica)
         self.left: Optional['Nodo'] = None
         self.right: Optional['Nodo'] = None
-        self.padre: Optional['Nodo'] = None
-        self.factor_balance:int = 0
-        self.height = 1
-        self.type = self.determinar_type(str(self.data)) 
-        self.typeImage: str = self.determinar_typeImage(str(self.data))
+        self.padre: Optional['Nodo'] = None #Se agrega el atributo padre
+        self.factor_balance:int = 0         #Se agrega el atributo factor de balanceo inicializado en 0
+        self.height = 1 #Altura del nodo inicializada en 1
+        self.type = self.determinar_type(str(self.data))  #Se determina el tipo de imagen, se llama metodo
+        self.typeImage: str = self.determinar_typeImage(str(self.data)) #Se determina el formato de la imagen, se llama metodo
         self.file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"data/{self.type}/{self.data}{self.typeImage}")
         #se obtiene el directorio del script y se une el directorio del script con la ruta relativa de la imagen (para verificación de existencia de la imagen)
-        self.size = self.get_size_archivo(os.path.join(os.path.dirname(os.path.abspath(__file__)), f"data/{self.type}/{self.data}{self.typeImage}"))
-        self.actualizar_factor_balance()
+        self.size = self.get_size_archivo(os.path.join(os.path.dirname(os.path.abspath(__file__)), f"data/{self.type}/{self.data}{self.typeImage}")) #Se obtiene el tamaño del archivo
+        self.actualizar_factor_balance() #Se actualiza el factor de balanceo
     def __str__(self) -> str:
         return str(self.data)
     def determinar_type(self, data: str) -> str:
@@ -86,17 +86,17 @@ class Nodo:
         return os.path.getsize(file_path) #Se obtiene el tamaño del archivo en bytes a partir de la ruta del archivo con la función os.path.getsize
 
     def calcular_altura(self, nodo: Optional['Nodo']) -> int:
-        if nodo is None:
+        if nodo is None: #Si el nodo es nulo, se retorna 0 (caso base)
             return 0
-        return max(self.calcular_altura(nodo.left), self.calcular_altura(nodo.right)) + 1
+        return max(self.calcular_altura(nodo.left), self.calcular_altura(nodo.right)) + 1 #Se retorna el máximo entre la altura del subárbol izquierdo y derecho más 1
 
-    def calcular_factor_balance(self) ->None:
-        altura_izquierda = self.calcular_altura(self.left)
-        altura_derecha = self.calcular_altura(self.right)
-        self.factor_balance = altura_derecha-altura_izquierda
-        return  altura_derecha-altura_izquierda
+    def calcular_factor_balance(self) ->None: #Se calcula el factor de balanceo
+        altura_izquierda = self.calcular_altura(self.left) #Se obtiene la altura del subárbol izquierdo
+        altura_derecha = self.calcular_altura(self.right) #Se obtiene la altura del subárbol derecho
+        self.factor_balance = altura_derecha-altura_izquierda #Se hace la resta
+        return  altura_derecha-altura_izquierda #Se retorna el factor de balanceo
     
-    def actualizar_factor_balance(self) -> None:
+    def actualizar_factor_balance(self) -> None: #Se actualiza el factor de balanceo en el atributo del nodo
         self.factor_balance = self.calcular_factor_balance()
         
     
@@ -113,70 +113,57 @@ class Tree:
     def __init__(self, data):
         self.root = Nodo(data)
 
-    def search(self, elem: Any) -> Tuple[Optional["Nodo"], Optional["Nodo"]]:
-        p, pad = self.root, None
-        while p is not None:
-            if elem == p.data:
+    def search(self, elem: Any) -> Tuple[Optional["Nodo"], Optional["Nodo"]]: #Busca un nodo
+        p, pad = self.root, None #Se inicializa el nodo y su padre
+        while p is not None:#Mientras el nodo no sea nulo
+            if elem == p.data: #Si el elemento es igual al dato del nodo, se retorna el nodo y su padre
                 return p, pad
-            elif elem < p.data:
+            elif elem < p.data:#Si el elemento es menor que el dato del nodo (izq), se actualiza el padre y se va al hijo izquierdo
                 pad = p
                 p = p.left
-            else:
+            else: #Si el elemento es mayor que el dato del nodo (der), se actualiza el padre y se va al hijo derecho
                 pad = p
                 p = p.right
+        #Si no se encuentra el nodo, se retorna None
         return p, pad
     
  
-    def level_order_recursive(self,root:Any, level=0)->None:
-        if root is None:
-            print("El árbol está vacío.")
-            return
-        if level == 0:
-            print("Nivel 0:", root.data)
-        
-        if root.left:
-            print(f"Nivel {level + 1} (izquierda):", root.left.data)
-            self.level_order_recursive(root.left, level + 1)
-
-        if root.right:
-            print(f"Nivel {level + 1} (derecha):", root.right.data)
-            self.level_order_recursive(root.right, level + 1)
          
-    def level_order(self) -> None:
-        if self.root is None:
+    def level_order(self) -> None: #Recorrido por niveles recursivo
+        if self.root is None: #Si el árbol está vacío, se imprime un mensaje
             print("El árbol está vacío.")
             return
-        q = Cola()
-        q.add(self.root)
-        self.ayuda(q)
-        self.postorder()
+        q = Cola() #Se inicializa una cola
+        q.add(self.root) #Se agrega la raíz a la cola
+        self.ayuda(q) #Se llama al método ayuda para recorrer el árbol 
+        self.postorder() #Se llama al método postorder para verificar el factor de balanceo de cada nodo
     
-    def ayuda(self,q:Cola) -> None:
-        if q.is_empty():
+    def ayuda(self,q:Cola) -> None: #Método para recorrer el árbol (ayuda al método level_order)
+        if q.is_empty(): #Si la cola está vacía (caso base)
             return None
-        else:
-            p = q.remove()
-            print(p.data)
+        else: #Si la cola no está vacía
+            p = q.remove() #Se remueve el primer elemento de la cola
+            print(p.data) #Se imprime el dato del nodo
             
-            if p.left is not None:
+            if p.left is not None: #Si el nodo tiene hijo izquierdo, se agrega a la cola
                 q.add(p.left)
-            if p.right is not None:
+            if p.right is not None:#Si el nodo tiene hijo derecho, se agrega a la cola
                 q.add(p.right)
-            self.ayuda(q)
+            self.ayuda(q) #Se llama recursivamente al método ayuda para recorrer el árbol
                    
-    def searchOnlyHim(self, elem: Any) -> Optional["Nodo"]:
-        p = self.root
-        while p is not None:
-            if elem == p.data:
+    def searchOnlyHim(self, elem: Any) -> Optional["Nodo"]:#Busca un nodo
+        p = self.root #Se inicializa el nodo
+        while p is not None:#Mientras el nodo no sea nulo
+            if elem == p.data: #Si el elemento es igual al dato del nodo, se retorna el nodo
                 return p
-            elif elem < p.data:
+            elif elem < p.data: #Si el elemento es menor que el dato del nodo (izq), se va al hijo izquierdo
                 p = p.left
-            else:
+            else: #Si el elemento es mayor que el dato del nodo (der), se va al hijo derecho
                 p = p.right
         return p
     
     def search_nodos_categoria_rango(self, categoria: str, rango1: float, rango2: float) -> List["Nodo"]:
-        # Lista para almacenar los nodos que cumplen con los criterios
+        # Lista para almacenar los nodos que cumplen con los criterios, incialemente vacía
         nodos_aprobados = []
 
         # Función auxiliar para recorrer el árbol
@@ -184,7 +171,7 @@ class Tree:
             if nodo:
                 # Verifica si el nodo cumple con los criterios
                 if nodo.type == categoria and rango1 <= nodo.size < rango2:
-                    nodos_aprobados.append(nodo)
+                    nodos_aprobados.append(nodo) # Si cumple, se agrega a la lista
 
                 # Recorre los subárboles izquierdo y derecho
                 traverse(nodo.left)
@@ -194,54 +181,61 @@ class Tree:
         traverse(self.root)
         return nodos_aprobados
 
-    def insert(self, data):
-        self.root = self._insert(self.root, data)
+    def insert(self, data): #Inserta un nodo
+        self.root = self._insert(self.root, data) #Se llama al método _insert para insertar el nodo
 
-    def _insert(self, node, data):
-        if not node:
+    def _insert(self, node, data): #Método para insertar un nodo
+        if not node: #Si el nodo es nulo, se crea un nuevo nodo con el dato
             return Nodo(data)
-        elif data < node.data:
+        elif data < node.data: #Si el dato es menor que el dato del nodo, se va al hijo izquierdo
             node.left = self._insert(node.left, data)
-        else:
+        else: #Si el dato es mayor que el dato del nodo, se va al hijo derecho
             node.right = self._insert(node.right, data)
 
-        node.height = 1 + max(self._get_height(node.left), self._get_height(node.right))
+        node.height = 1 + max(self._get_height(node.left), self._get_height(node.right)) #Se actualiza la altura del nodo
 
-        balance = self._get_balance(node)
+        balance = self._get_balance(node) #Se calcula el factor de balanceo
 
-        # Caso izquierdo-izquierdo
-        if balance > 1 and data < node.left.data:
+        # Caso izquierdo simple (2, 1)
+        if balance > 1 and data < node.left.data: 
+            #Si el factor de balanceo es mayor que 1 y el dato es menor que el dato del hijo izquierdo
+            return self._rotate_left(node) #se manda el nodo desbalanceado a la rotación derecha
+
+        # Caso derecho simple (-2, -1)
+        if balance < -1 and data > node.right.data: 
+            #Si el factor de balanceo es menor que -1 y el dato es mayor que el dato del hijo derecho
             return self._rotate_right(node)
 
-        # Caso derecho-derecho
-        if balance < -1 and data > node.right.data:
-            return self._rotate_left(node)
+        # Caso izquierdo-derecho (2, -1)
+        if balance > 1 and data > node.left.data: 
+            #Si el factor de balanceo es mayor que 1 y el dato es mayor que el dato del hijo izquierdo
+            node.left = self._rotate_left(node.left) #Se rota a la izquierda el hijo izquierdo
+            return self._rotate_right(node) #Se rota a la derecha el nodo
 
-        # Caso izquierdo-derecho
-        if balance > 1 and data > node.left.data:
-            node.left = self._rotate_left(node.left)
-            return self._rotate_right(node)
-
-        # Caso derecho-izquierdo
-        if balance < -1 and data < node.right.data:
-            node.right = self._rotate_right(node.right)
-            return self._rotate_left(node)
+        # Caso derecho-izquierdo (-2|1)
+        if balance < -1 and data < node.right.data: 
+            #Si el factor de balanceo es menor que -1 y el dato es menor que el dato del hijo derecho
+            node.right = self._rotate_right(node.right) #Se rota a la derecha el hijo derecho
+            return self._rotate_left(node) #Se rota a la izquierda el nodo
 
         return node
 
-    def _get_balance(self, node):
+    def _get_balance(self, node): #Método para obtener el factor de balanceo
         if not node:
             return 0
-        return self._get_height(node.left) - self._get_height(node.right)
-    def _rotate_left(self, x):
-        y = x.right
-        T2 = y.left if y else None
+        return self._get_height(node.left) - self._get_height(node.right) #Se retorna la resta de la altura del hijo izquierdo y derecho
+    
+    #Métodos para rotar el árbol
+    
+    def _rotate_left(self, x): #se ingresa nodo desbalanceado (x)
+        y = x.right #se obtiene el hijo derecho del nodo desbalanceado
+        T2 = y.left if y else None #se obtiene el hijo izquierdo del hijo derecho del nodo desbalanceado
+        
+        if y: #Si el hijo derecho del nodo desbalanceado no es nulo
+            y.left = x #Se cambia el hijo izquierdo del hijo derecho del nodo desbalanceado por el nodo desbalanceado
+        x.right = T2 #Se cambia el hijo derecho del nodo desbalanceado por el hijo izquierdo del hijo derecho del nodo desbalanceado
 
-        if y:
-            y.left = x
-        x.right = T2
-
-        x.height = 1 + max(self._get_height(x.left), self._get_height(x.right))
+        x.height = 1 + max(self._get_height(x.left), self._get_height(x.right)) #Se actualiza la altura del nodo desbalanceado
         if y:
             y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
 
