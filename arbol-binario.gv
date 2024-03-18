@@ -1,20 +1,38 @@
 // Árbol de Búsqueda Binaria
 digraph {
-	bike_001 [label=bike_001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpsje_xdoq.png" labelloc=b shape=none]
-	0002 [label=0002 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpezf5hk9e.png" labelloc=b shape=none]
+	bike_001 [label=bike_001 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpg0zrhz5_.png" labelloc=b shape=none]
+	bike_001 [label="bike_001
+1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpg0zrhz5_.png" labelloc=b shape=none]
+	0002 [label=0002 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp9tuqnn_b.png" labelloc=b shape=none]
+	0002 [label="0002
+0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp9tuqnn_b.png" labelloc=b shape=none]
 	bike_001 -> 0002
-	0001 [label=0001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp0mf_5zbd.png" labelloc=b shape=none]
+	0001 [label=0001 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp3u2_8m6d.png" labelloc=b shape=none]
+	0001 [label="0001
+0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp3u2_8m6d.png" labelloc=b shape=none]
 	0002 -> 0001
-	0003 [label=0003 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpl1eavmzk.png" labelloc=b shape=none]
+	0003 [label=0003 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpuo4yd23_.png" labelloc=b shape=none]
+	0003 [label="0003
+0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpuo4yd23_.png" labelloc=b shape=none]
 	0002 -> 0003
-	"dog.1" [label="dog.1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmphl0ntyfs.png" labelloc=b shape=none]
+	"dog.1" [label="dog.1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp2lmk8ll7.png" labelloc=b shape=none]
+	"dog.1" [label="dog.1
+0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp2lmk8ll7.png" labelloc=b shape=none]
 	bike_001 -> "dog.1"
-	carsgraz_001 [label=carsgraz_001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpql5feazn.png" labelloc=b shape=none]
+	carsgraz_001 [label=carsgraz_001 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp426t9fp1.png" labelloc=b shape=none]
+	carsgraz_001 [label="carsgraz_001
+1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp426t9fp1.png" labelloc=b shape=none]
 	"dog.1" -> carsgraz_001
-	"cat.1" [label="cat.1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp1d56k934.png" labelloc=b shape=none]
+	"cat.1" [label="cat.1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp0sj2i5br.png" labelloc=b shape=none]
+	"cat.1" [label="cat.1
+0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmp0sj2i5br.png" labelloc=b shape=none]
 	carsgraz_001 -> "cat.1"
-	"horse-1" [label="horse-1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp11nwz5i9.png" labelloc=b shape=none]
+	"horse-1" [label="horse-1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpjv0470_3.png" labelloc=b shape=none]
+	"horse-1" [label="horse-1
+1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpjv0470_3.png" labelloc=b shape=none]
 	"dog.1" -> "horse-1"
-	"rider-1" [label="rider-1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpnz5pug5s.png" labelloc=b shape=none]
+	"rider-1" [label="rider-1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmppn36pk8a.png" labelloc=b shape=none]
+	"rider-1" [label="rider-1
+0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmppn36pk8a.png" labelloc=b shape=none]
 	"horse-1" -> "rider-1"
 }

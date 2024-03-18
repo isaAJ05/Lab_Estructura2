@@ -37,12 +37,14 @@ def main() -> None:
             #Operación para insertar un nodo
             node_data = input("Ingrese el dato del nodo a insertar: ")
             sample_tree.insert(node_data)
+            sample_tree.postorder() 
             sample_tree.graficar()  # Vuelve a generar el gráfico
 
         elif option == "2":
             #Operación para eliminar un nodo
             node_data = input("Ingrese el dato del nodo a eliminar: ")
             sample_tree.delete(node_data)
+            sample_tree.postorder()
             sample_tree.graficar()  # Vuelve a generar el gráfico
 
         elif option == "3":
