@@ -511,7 +511,7 @@ class Tree:
         while nodo is not None:
             nodo.calcular_factor_balance()
             nodo = nodo.padre
-
+#
     def postorder(self, node: Optional["Nodo"] = None) -> None:
         if node is None:
             node = self.root
