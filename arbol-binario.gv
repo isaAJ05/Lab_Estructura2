@@ -1,6 +1,10 @@
 // Árbol de Búsqueda Binaria
 digraph {
-	bike_001 [label=bike_001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp7d25u08p.png" labelloc=b shape=none]
+	bike_001 [label=bike_001 fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpqk7pgy4n.png" labelloc=b shape=none]
 	bike_001 [label="bike_001
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp7d25u08p.png" labelloc=b shape=none]
+1" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpqk7pgy4n.png" labelloc=b shape=none]
+	"rider-2" [label="rider-2" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpq7mvu8hp.png" labelloc=b shape=none]
+	"rider-2" [label="rider-2
+0" fontcolor=red fontname="Arial Bold" image="C:\Users\PAULAN~1\AppData\Local\Temp\tmpq7mvu8hp.png" labelloc=b shape=none]
+	bike_001 -> "rider-2"
 }

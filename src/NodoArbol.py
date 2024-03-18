@@ -136,8 +136,7 @@ class Tree:
         q = Cola() #Se inicializa una cola
         q.add(self.root) #Se agrega la raíz a la cola
         self.ayuda(q) #Se llama al método ayuda para recorrer el árbol 
-        self.postorder() #Se llama al método postorder para verificar el factor de balanceo de cada nodo
-    
+       
     def ayuda(self,q:Cola) -> None: #Método para recorrer el árbol (ayuda al método level_order)
         if q.is_empty(): #Si la cola está vacía (caso base)
             return None
@@ -490,7 +489,7 @@ class Tree:
     def balancear(self, p: "Nodo") -> "Nodo": #Método para balancear el árbol
         if p is not None:
             p.calcular_factor_balance() 
-            print("---Factor de balanceo ",p.data,": ", p.factor_balance)  #Se imprime el factor de balanceo del nodo
+            
             if p.factor_balance > 1: #Si el factor de balanceo es mayor que 1
                 if p.left is not None and p.left.factor_balance >= 0: #Si el hijo izquierdo del nodo no es nulo y el factor de balanceo del hijo izquierdo es mayor o igual que 0
                     p = self.rot_der(p)  #Se rota a la derecha el nodo
