@@ -1,30 +1,6 @@
 // Árbol de Búsqueda Binaria
 digraph {
-	carsgraz_001 [label=carsgraz_001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpe_j816ez.png" labelloc=b shape=none]
-	carsgraz_001 [label="carsgraz_001
--1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpe_j816ez.png" labelloc=b shape=none]
-	0002 [label=0002 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpyfn2mnum.png" labelloc=b shape=none]
-	0002 [label="0002
-1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpyfn2mnum.png" labelloc=b shape=none]
-	carsgraz_001 -> 0002
-	0001 [label=0001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpwdzbgl7g.png" labelloc=b shape=none]
-	0001 [label="0001
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpwdzbgl7g.png" labelloc=b shape=none]
-	0002 -> 0001
-	bike_001 [label=bike_001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp3sxc0uo5.png" labelloc=b shape=none]
+	bike_001 [label=bike_001 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp7d25u08p.png" labelloc=b shape=none]
 	bike_001 [label="bike_001
--1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp3sxc0uo5.png" labelloc=b shape=none]
-	0002 -> bike_001
-	0003 [label=0003 fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpcou47etm.png" labelloc=b shape=none]
-	0003 [label="0003
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpcou47etm.png" labelloc=b shape=none]
-	bike_001 -> 0003
-	"dog.1" [label="dog.1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmputvkb2w7.png" labelloc=b shape=none]
-	"dog.1" [label="dog.1
--1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmputvkb2w7.png" labelloc=b shape=none]
-	carsgraz_001 -> "dog.1"
-	"cat.1" [label="cat.1" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpn_7f19t3.png" labelloc=b shape=none]
-	"cat.1" [label="cat.1
-0" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmpn_7f19t3.png" labelloc=b shape=none]
-	"dog.1" -> "cat.1"
+0" fontcolor=red fontname="Arial Bold" image="C:\Users\USUARIO\AppData\Local\Temp\tmp7d25u08p.png" labelloc=b shape=none]
 }

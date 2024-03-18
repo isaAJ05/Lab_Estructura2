@@ -291,70 +291,61 @@ class Tree:
     
         
 
-    def delete(self, elem: Any, mode: bool = True) -> bool:
-        p, pad = self.search(elem)
-        if p is not None:
-            if p.left is None and p.right is None:
-                if p == pad.left:
-                    pad.left = None
-                else:
-                    pad.right = None
-                del p
-            elif p.left is not None and p.right is None:
-                if p == pad.left:
-                    pad.left = p.left
-                else:
-                    pad.right = p.left
-                del p
-            elif p.left is None and p.right is not None:
-                if p == pad.left:
-                    pad.left = p.right
-                else:
-                    pad.right = p.right
-                del p
-            else:
-                if mode:
-                    pred, pad_pred = self.__pred(p)
-                    p.data = pred.data
-                    if pred.left is not None:
-                        if pad_pred == p:
-                            pad_pred.left = pred.left
-                        else:
-                            pad_pred.right = pred.left
-                    else:
-                        if pad_pred == p:
-                            pad_pred.left = None
-                        else:
-                            pad_pred.right = None
-                    del pred
-                else:
-                    sus, pad_sus = self.__sus(p)
-                    p.data = sus.data
-                    if sus.right is not None:
-                        if pad_sus == p:
-                            pad_sus.right = sus.right
-                        else:
-                            pad_sus.left = sus.right
-                    else:
-                        if pad_sus == p:
-                            pad_sus.right = None
-                        else:
-                            pad_sus.left = None
-                    del sus
-            return True
-        return False
+    def delete(self, data):
+        self.root = self._delete(self.root, data)
 
-    def __pred(self, node: "Nodo") -> Tuple["Nodo", "Nodo"]:
-        p, pad = node.left, node
-        while p.right is not None:
-            p, pad = p.right, p
-        return p, pad
+    def _delete(self, root, data):
+        # Paso 1: eliminación estándar en un ABB
+        if not root:
+            return root
+        elif data < root.data:
+            root.left = self._delete(root.left, data)
+        elif data > root.data:
+            root.right = self._delete(root.right, data)
+        else:
+            if root.left is None:
+                temp = root.right
+                root = None
+                return temp
+            elif root.right is None:
+                temp = root.left
+                root = None
+                return temp
+            temp = self._get_min_value_node(root.right)
+            root.data = temp.data
+            root.right = self._delete(root.right, temp.data)
 
-    def __sus(self, node: "Nodo") -> Tuple["Nodo", "Nodo"]:
-        p, pad = node.right, node
-        while p.left is not None:
-            p, pad = p.left, p
-        return p, pad
+        # Paso 2: actualización de la altura del nodo padre
+        root.height = 1 + max(self._get_height(root.left), self._get_height(root.right))
+
+        # Paso 3: recalculación del factor de equilibrio
+        balance = self._get_balance(root)
+
+        # Paso 4: si el nodo está desequilibrado, entonces hay 4 casos
+        # Caso izquierdo-izquierdo
+        if balance > 1 and self._get_balance(root.left) >= 0:
+            return self._rotate_right(root)
+
+        # Caso derecho-derecho
+        if balance < -1 and self._get_balance(root.right) <= 0:
+            return self._rotate_left(root)
+
+        # Caso izquierdo-derecho
+        if balance > 1 and self._get_balance(root.left) < 0:
+            root.left = self._rotate_left(root.left)
+            return self._rotate_right(root)
+
+        # Caso derecho-izquierdo
+        if balance < -1 and self._get_balance(root.right) > 0:
+            root.right = self._rotate_right(root.right)
+            return self._rotate_left(root)
+
+        return root
+
+    def _get_min_value_node(self, root):
+        if root is None or root.left is None:
+            return root
+        return self._get_min_value_node(root.left)
     
     def graficar(self) -> None:
             # Crea un objeto de gráfico
