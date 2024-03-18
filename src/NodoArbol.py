@@ -35,7 +35,7 @@ class Nodo:
         self.right: Optional['Nodo'] = None
         self.padre: Optional['Nodo'] = None
         self.factor_balance:int = 0
-        
+        self.height = 1
         self.type = self.determinar_type(str(self.data)) 
         self.typeImage: str = self.determinar_typeImage(str(self.data))
         self.file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"data/{self.type}/{self.data}{self.typeImage}")
@@ -110,8 +110,8 @@ class Tree:
     # c. Encontrar el padre del nodo.
     # d. Encontrar el abuelo del nodo.
     # e. Encontrar el tío del nodo.
-    def __init__(self, root: "Nodo"=None) -> None: #Inicializa el arbol
-        self.root = root
+    def __init__(self, data):
+        self.root = Nodo(data)
 
     def search(self, elem: Any) -> Tuple[Optional["Nodo"], Optional["Nodo"]]:
         p, pad = self.root, None
@@ -194,29 +194,101 @@ class Tree:
         traverse(self.root)
         return nodos_aprobados
 
-    def insert(self, elem: Any) -> bool:
-          
-        to_insert = Nodo(elem)
-        if self.root is None:
-            self.root = to_insert
-            to_insert.actualizar_factor_balance()
-            return True
+    def insert(self, data):
+        self.root = self._insert(self.root, data)
+
+    def _insert(self, node, data):
+        if not node:
+            return Nodo(data)
+        elif data < node.data:
+            node.left = self._insert(node.left, data)
         else:
-            p, pad = self.search(elem)
-            if p is None:
-                if elem < pad.data:
-                    pad.left = to_insert
-                   
-                    pad.left.actualizar_factor_balance()
-                else:
-                    pad.right = to_insert
-                    pad.right.actualizar_factor_balance()
-                
-               
-                to_insert.actualizar_factor_balance()
-                return True
-                
-            return False
+            node.right = self._insert(node.right, data)
+
+        node.height = 1 + max(self._get_height(node.left), self._get_height(node.right))
+
+        balance = self._get_balance(node)
+
+        # Caso izquierdo-izquierdo
+        if balance > 1 and data < node.left.data:
+            return self._rotate_right(node)
+
+        # Caso derecho-derecho
+        if balance < -1 and data > node.right.data:
+            return self._rotate_left(node)
+
+        # Caso izquierdo-derecho
+        if balance > 1 and data > node.left.data:
+            node.left = self._rotate_left(node.left)
+            return self._rotate_right(node)
+
+        # Caso derecho-izquierdo
+        if balance < -1 and data < node.right.data:
+            node.right = self._rotate_right(node.right)
+            return self._rotate_left(node)
+
+        return node
+
+    def _get_balance(self, node):
+        if not node:
+            return 0
+        return self._get_height(node.left) - self._get_height(node.right)
+    def _rotate_left(self, x):
+        y = x.right
+        T2 = y.left if y else None
+
+        if y:
+            y.left = x
+        x.right = T2
+
+        x.height = 1 + max(self._get_height(x.left), self._get_height(x.right))
+        if y:
+            y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
+
+        return y
+
+    def _rotate_right(self, y):
+        x = y.left
+        T2 = x.right if x else None
+
+        if x:
+            x.right = y
+        y.left = T2
+
+        y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
+        if x:
+            x.height = 1 + max(self._get_height(x.left), self._get_height(x.right))
+
+        return x
+
+    def _get_height(self, node):
+        if not node:
+            return 0
+        return node.height
+
+    def _balance(self, nodo):
+        if nodo is None:
+            return nodo
+        if nodo.factor_balance > 1:
+            if nodo.right is not None and nodo.right.factor_balance < 0:
+                nodo.right = self._rotate_right(nodo.right)
+            nodo = self._rotate_left(nodo)
+        elif nodo.factor_balance < -1:
+            if nodo.left is not None and nodo.left.factor_balance > 0:
+                nodo.left = self._rotate_left(nodo.left)
+            nodo = self._rotate_right(nodo)
+        return nodo
+
+    def _rotate_left_right(self, nodo):
+        if nodo is not None:
+            nodo.left = self._rotate_left(nodo.left)
+        return self._rotate_right(nodo)
+
+    def _rotate_right_left(self, nodo):
+        if nodo is not None:
+            nodo.right = self._rotate_right(nodo.right)
+        return self._rotate_left(nodo)
+    
         
 
     def delete(self, elem: Any, mode: bool = True) -> bool:
@@ -430,29 +502,27 @@ class Tree:
         print(f' {data_s!r} no tiene abuelo')
             
 
-    def __balancear(self, p: "Nodo") -> "Nodo":
-        
-            if p is not None:
-                p.left = self.__balancear(p.left)
-                p.right = self.__balancear(p.right)
-                p.calcular_factor_balance()
-                print("---Factor de balanceo ",p.data,": ", p.factor_balance) 
-                if p.factor_balance > 1:
-                    if p.left is not None and p.left.factor_balance >= 0:
-                        p = self.rot_der(p) 
-                    else:
-                        p = self.rot_izq_der(p)
-                elif p.factor_balance < -1:
-                    if p.right is not None and p.right.factor_balance <= 0:
-                        p = self.rot_izq(p)
-                    else:
-                        p = self.rot_der_izq(p)
+    def balancear(self, p: "Nodo") -> "Nodo":
+        if p is not None:
+            p.calcular_factor_balance()
+            print("---Factor de balanceo ",p.data,": ", p.factor_balance) 
+            if p.factor_balance > 1:
+                if p.left is not None and p.left.factor_balance >= 0:
+                    p = self.rot_der(p) 
+                else:
+                    p = self.rot_izq_der(p)
+            elif p.factor_balance < -1:
+                if p.right is not None and p.right.factor_balance <= 0:
+                    p = self.rot_izq(p)
+                else:
+                    p = self.rot_der_izq(p)
 
-                p.calcular_factor_balance()
-                
+            p.calcular_factor_balance()
 
-                
-                return p
+            p.left = self.balancear(p.left)
+            p.right = self.balancear(p.right)
+
+        return p
             
 
     def rot_der(self, p: "Nodo") -> "Nodo": 
@@ -471,8 +541,8 @@ class Tree:
                 p.padre.right = q
         q.padre = p.padre
         p.padre = q
-      #  p.actualizar_factor_balance()
-      #  q.actualizar_factor_balance()
+        p.actualizar_factor_balance()
+        q.actualizar_factor_balance()
         return q
 
     def rot_izq(self, p: "Nodo") -> "Nodo":
@@ -491,26 +561,48 @@ class Tree:
                 p.padre.right = q
         q.padre = p.padre
         p.padre = q
-      #  p.actualizar_factor_balance()
-      #  q.actualizar_factor_balance()
+        p.actualizar_factor_balance()
+        q.actualizar_factor_balance()
         return q
 
     def rot_izq_der(self, p: "Nodo") -> "Nodo":
-            print("Rotación izquierda-derecha")
-            if p.left is not None:
-                p.left = self.rot_izq(p.left)
-            return self.rot_der(p)
+        print("Rotación izquierda-derecha")
+        if p.left is not None:
+            p.left = self.rot_izq(p.left)
+        return self.rot_der(p)
 
     def rot_der_izq(self, p: "Nodo") -> "Nodo":
-            print("Rotación derecha-izquierda")
-            if p.right is not None:
-                p.right = self.rot_der(p.right)
-            return self.rot_izq(p)
+        print("Rotación derecha-izquierda")
+        if p.right is not None:
+            p.right = self.rot_der(p.right)
+        return self.rot_izq(p)
 
     def actualizar_factores_balance(self, nodo: "Nodo") -> None:
         while nodo is not None:
             nodo.calcular_factor_balance()
             nodo = nodo.padre
+    def encontrar_nodo(self, valor):
+        nodo_actual = self.root
+        while nodo_actual:
+            if valor < nodo_actual.data:
+                nodo_actual = nodo_actual.left
+            elif valor > nodo_actual.data:
+                nodo_actual = nodo_actual.right
+            else:
+                return nodo_actual
+        return None
+    def encontrar_primer_nodo_desbalanceado(self, nodo):
+        if nodo:
+            nodo_izquierdo_desbalanceado = self.encontrar_primer_nodo_desbalanceado(nodo.left)
+            if nodo_izquierdo_desbalanceado:
+                return nodo_izquierdo_desbalanceado
+            nodo_derecho_desbalanceado = self.encontrar_primer_nodo_desbalanceado(nodo.right)
+            if nodo_derecho_desbalanceado:
+                return nodo_derecho_desbalanceado
+            nodo.calcular_factor_balance()
+            if nodo.factor_balance not in [-1, 0, 1]:
+                return nodo
+        return None
 #
     def postorder(self, node: Optional["Nodo"] = None) -> None:
         if node is None:

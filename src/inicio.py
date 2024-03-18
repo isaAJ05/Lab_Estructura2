@@ -5,7 +5,8 @@ def main() -> None:
     
     def generate_sample_abb() -> Tree:
         # Genera un árbol de búsqueda binaria de ejemplo
-        tree = Tree(Nodo("bike_001"))
+        tree = Tree("bike_001")
+        """
         tree.insert("dog.1")
         tree.insert("carsgraz_001")
         tree.insert("cat.1")
@@ -13,7 +14,7 @@ def main() -> None:
         tree.insert("0001")
         tree.insert("0003")
         tree.insert("horse-1")
-        tree.insert("rider-1")
+        tree.insert("rider-1")"""
         return tree
     
     print("\nBienvenidx")
@@ -37,7 +38,6 @@ def main() -> None:
             #Operación para insertar un nodo
             node_data = input("Ingrese el dato del nodo a insertar: ")
             sample_tree.insert(node_data)
-            sample_tree.postorder() 
             sample_tree.graficar()  # Vuelve a generar el gráfico
 
         elif option == "2":
