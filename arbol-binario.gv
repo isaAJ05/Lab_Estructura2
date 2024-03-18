@@ -1,10 +1,10 @@
 // Árbol de Búsqueda Binaria
 digraph {
-	carsgraz_177 [label="carsgraz_177
-1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
+	carsgraz_354 [label="carsgraz_354
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	bike_110 [label="bike_110
 -1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	carsgraz_177 -> bike_110
+	carsgraz_354 -> bike_110
 	0177 [label="0177
 0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	bike_110 -> 0177
@@ -32,51 +32,36 @@ digraph {
 	carsgraz_127 [label="carsgraz_127
 0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	carsgraz_100 -> carsgraz_127
-	"dog.161" [label="dog.161
-1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	carsgraz_177 -> "dog.161"
-	"cat.142" [label="cat.142
-0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"dog.161" -> "cat.142"
-	carsgraz_354 [label="carsgraz_354
-1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"cat.142" -> carsgraz_354
-	"cat.100" [label="cat.100
-0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	carsgraz_354 -> "cat.100"
-	"cat.72" [label="cat.72
--1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"cat.142" -> "cat.72"
-	"cat.153" [label="cat.153
-0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"cat.72" -> "cat.153"
-	"horse-42" [label="horse-42
-0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"dog.161" -> "horse-42"
 	"dog.73" [label="dog.73
 0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"horse-42" -> "dog.73"
-	"dog.60" [label="dog.60
--1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"dog.73" -> "dog.60"
+	carsgraz_354 -> "dog.73"
 	"dog.165" [label="dog.165
+-1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
+	"dog.73" -> "dog.165"
+	"cat.153" [label="cat.153
 0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"dog.60" -> "dog.165"
+	"dog.165" -> "cat.153"
+	"cat.100" [label="cat.100
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
+	"cat.153" -> "cat.100"
+	"cat.72" [label="cat.72
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
+	"cat.153" -> "cat.72"
+	"dog.60" [label="dog.60
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
+	"dog.165" -> "dog.60"
+	"horse-9" [label="horse-9
+0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
+	"dog.73" -> "horse-9"
 	"horse-198" [label="horse-198
 -1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"dog.73" -> "horse-198"
+	"horse-9" -> "horse-198"
 	"horse-139" [label="horse-139
 0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"horse-198" -> "horse-139"
-	"rider-107" [label="rider-107
-1" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"horse-42" -> "rider-107"
-	"horse-9" [label="horse-9
-0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"rider-107" -> "horse-9"
 	"rider-201" [label="rider-201
 0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
-	"rider-107" -> "rider-201"
+	"horse-9" -> "rider-201"
 	"rider-125" [label="rider-125
 0" fontcolor=red fontname="Arial Bold" labelloc=b shape=circle]
 	"rider-201" -> "rider-125"
